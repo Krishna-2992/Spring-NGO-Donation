@@ -55,7 +55,6 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String handleLogin(@ModelAttribute("command") LoginCommand cmd, Model m, HttpSession session) {
-        try {
             System.out.println("inside user login");
             User loggedInUser = userService.login(cmd.getLoginName(), cmd.getPassword());
             System.out.println(loggedInUser);
@@ -65,21 +64,21 @@ public class UserController {
             } else {
                 //success
                 // check role and redirect to appropriate dashboard
-                if(loggedInUser.getRole().toString().equals("Admin")) {
+                if(loggedInUser.getRole().equals("Admin")) {
+                    System.out.println("trying to login admin");
                     addUserInSession(loggedInUser, session);
-                    return "redirect:dashboard_admin";
-                } else if (loggedInUser.getRole().toString().equals("Donor")) {
+                    System.out.println("route to dashboard_admin");
+                    return "dashboard_admin";
+                }else if (loggedInUser.getRole().equals("Donor")) {
                     addUserInSession(loggedInUser, session);
-                    return "redirect:dashboard_user";
+                    System.out.println("route to dashboard_user");
+                    System.out.println(loggedInUser);
+                    return "dashboard_user";
                 } else {
                     m.addAttribute("err", "invalid user role");
                     return "index";
                 }
             }
-        } catch (UserBlockedException ex) {
-            m.addAttribute("err", ex.getMessage());
-            return "index";
-        }
     }
 
     @RequestMapping(value = {"/logout"})
@@ -90,11 +89,13 @@ public class UserController {
 
     @RequestMapping(value = "/user_dashboard")
     public String userDashboard() {
+        System.out.println("user dashboard");
         return "dashboard_user"; // /WEB-INF/view/index.jsp
     }
 
     @RequestMapping(value = "/admin_dashboard")
     public String adminDashboard() {
+        System.out.println("admin dashboard");
         return "dashboard_admin"; // /WEB-INF/view/index.jsp
     }
 

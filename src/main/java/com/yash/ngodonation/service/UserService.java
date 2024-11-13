@@ -22,7 +22,7 @@ public interface UserService {
      * @param password
      * @return
      */
-    public User login(String loginName, String password) throws UserBlockedException;
+    public User login(String loginName, String password);
 
     public List<User> getUserList();
 

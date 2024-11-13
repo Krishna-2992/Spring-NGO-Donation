@@ -56,23 +56,20 @@
       <c:if test="${param.act eq 'reg'}">
         <p class="success">User Registered Successfully. Please login</p>
       </c:if>
-      <s:url var="url_login" value="/login" />
-      <f:form action="${url_login}" modelAttribute="command" class="mb-3">
+          <s:url var="url_login" value="/donate" />
+
+
+      <f:form action="${url_donate}" modelAttribute="command" class="mb-3">
         <div class="mb-3">
-          <label for="loginName" class="form-label">Username</label>
+          <label for="loginName" class="form-label">Amount</label>
           <f:input path="loginName" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <f:password path="password" class="form-control" />
         </div>
         <div class="d-grid gap-2">
           <button class="btn btn-primary">Login</button>
         </div>
       </f:form>
-      <div class="text-center">
-        <a href="reg_form">New User Registration</a>
-      </div>
+
+
     </div>
   </body>
 </html>

@@ -45,12 +45,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td height="25px">
-                        <%-- Menu --%>
-                        <jsp:include page="include/menu.jsp"/>
-                    </td>
-                </tr>
-                <tr>
                     <td height="350px" valign="top">
                         <%-- Page Content Area--%>
                         <h3>User List</h3>

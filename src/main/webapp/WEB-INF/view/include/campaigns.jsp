@@ -55,6 +55,18 @@ isELIgnored="false" %>
         background-color: white;
         text-color: blue;
       }
+      .btn {
+                border: none;
+                padding: 10px 20px; /* Adds padding around the text */
+                font-size: 16px; /* Increases the font size */
+                color: white; /* Text color */
+                background-color: #007BFF; /* Button background color */
+                border: none; /* Removes any border */
+                border-radius: 5px; /* Rounds the corners */
+                text-decoration: none; /* Removes underline from the link */
+                text-align: center; /* Centers the text */
+                transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+            }
     </style>
     <script src="static/js/jquery.js"></script>
     <script>
@@ -81,6 +93,7 @@ isELIgnored="false" %>
           <th>Target Amount</th>
           <th>Start Date</th>
           <th>End Date</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -93,6 +106,9 @@ isELIgnored="false" %>
             <td>${u.targetAmount}</td>
             <td>${u.startDate}</td>
             <td>${u.endDate}</td>
+            <td>
+                <a href="donation_form?campaignId=${u.campaignId}" class="btn">Donate now</a>
+            </td>
           </tr>
         </c:forEach>
       </tbody>
