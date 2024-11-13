@@ -18,8 +18,7 @@ public class CampaignController {
     private CampaignService campaignService;
 
     @RequestMapping(value = "/campaigns")
-    public String getUserList(Model m, HttpSession session) {
-        System.out.println("setting the campaign list!!");
+    public String getAllCampaigns(Model m, HttpSession session) {
         m.addAttribute("campaignList", campaignService.getAllCampaigns());
         session.setAttribute("campaignList", campaignService.getAllCampaigns());
         m.addAttribute("campaignFetched", "true");

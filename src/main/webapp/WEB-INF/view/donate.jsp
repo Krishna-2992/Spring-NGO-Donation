@@ -15,6 +15,7 @@
       body {
         font-family: 'Roboto', Arial, sans-serif;
         background-color: #f5f5f5;
+
       }
       .login-form {
         max-width: 400px;
@@ -46,7 +47,7 @@
   <body>
     <jsp:include page="include/navbar.jsp" />
     <div class="login-form">
-      <h3 class="text-center mb-4">User Login</h3>
+      <h3 class="text-center mb-4">Donate Funds</h3>
       <c:if test="${err!=null}">
         <p class="error">${err}</p>
       </c:if>
@@ -56,16 +57,15 @@
       <c:if test="${param.act eq 'reg'}">
         <p class="success">User Registered Successfully. Please login</p>
       </c:if>
-          <s:url var="url_login" value="/donate" />
 
 
-      <f:form action="${url_donate}" modelAttribute="command" class="mb-3">
+      <f:form action="donate" modelAttribute="command" class="mb-3">
         <div class="mb-3">
-          <label for="loginName" class="form-label">Amount</label>
-          <f:input path="loginName" class="form-control" />
+          <label for="amount" class="form-label">Amount</label>
+          <f:input path="amount" class="form-control" />
         </div>
         <div class="d-grid gap-2">
-          <button class="btn btn-primary">Login</button>
+          <button class="btn btn-primary">Donate</button>
         </div>
       </f:form>
 

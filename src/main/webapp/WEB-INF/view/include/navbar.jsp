@@ -70,16 +70,16 @@
 
         <c:if test="${userId!=null && role == 'Admin'}">
             <!-- Admin menu -->
-            <a href="#" class="admin-link">Home</a> |
-            <a href="admin_users" class="admin-link">User List</a> |
+            <a href="admin_dashboard" class="admin-link">Home</a> |
+            <a href="listDonors" class="admin-link">Donors</a> |
+            <a href="listDonations" class="admin-link">Donations</a> |
             <a href="logout" class="admin-link">Logout</a>
         </c:if>
 
         <c:if test="${userId!=null && role == 'Donor'}">
             <!-- Donor menu -->
             <a href="user_dashboard" class="donor-link">Home</a> |
-            <a href="user_contact_form" class="donor-link">Add Contact</a> |
-            <a href="user_clist" class="donor-link">Contact List</a> |
+            <a href="listDonations" class="donor-link">Donations</a> |
             <a href="logout" class="donor-link">Logout</a>
         </c:if>
     </div>

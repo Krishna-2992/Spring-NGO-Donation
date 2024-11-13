@@ -1,8 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@taglib
-uri="http://www.springframework.org/tags" prefix="s" %> <%@taglib
-uri="http://www.springframework.org/tags/form" prefix="f" %> <%@taglib
-uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ page
-isELIgnored="false" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,9 +11,14 @@ isELIgnored="false" %>
     <title>User Login - Contact Application</title>
     <link href="static/css/style.css" rel="stylesheet" type="text/css" />
     <style>
+    *{
+
+    }
       body {
         font-family: Arial, Helvetica, Geneva, sans-serif;
         font-size: 18px;
+          margin: 0;
+            padding: 0;
       }
       .error {
         color: #ff0000;

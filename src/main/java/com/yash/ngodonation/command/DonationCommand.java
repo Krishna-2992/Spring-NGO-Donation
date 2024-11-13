@@ -1,8 +1,6 @@
 package com.yash.ngodonation.command;
 
 
-import com.yash.ngodonation.domain.User;
-
 public class DonationCommand {
 
     private Integer amount;
