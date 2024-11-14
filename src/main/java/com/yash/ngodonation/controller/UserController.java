@@ -42,7 +42,7 @@ public class UserController {
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
             m.addAttribute("err", "Username is already registered. Please select another username.");
-            return "reg_form";//JSP
+            return "index";//JSP
         }
     }
 
