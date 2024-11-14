@@ -64,7 +64,7 @@
             <!-- Guest menu -->
             <a href="campaigns" class="guest-link">Home</a> |
             <a href="login_form" class="guest-link">Login</a> |
-            <a href="reg_form" class="guest-link">Register</a> |
+            <a href="reg_form" class="guest-link">Register</a>
         </c:if>
 
         <c:if test="${userId!=null && role == 'Admin'}">

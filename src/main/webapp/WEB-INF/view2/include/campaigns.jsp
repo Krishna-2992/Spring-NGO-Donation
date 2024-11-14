@@ -7,7 +7,7 @@ isELIgnored="false" %>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>User List - Contact Application</title>
+    <title>User List - NGO Donation</title>
     <link href="static/css/style.css" rel="stylesheet" type="text/css" />
     <style>
       body {
@@ -30,7 +30,7 @@ isELIgnored="false" %>
       }
 
       .user-table thead {
-        background-color: #ffffff;
+        background-color: #3498db;
         color: white;
       }
 
@@ -56,17 +56,17 @@ isELIgnored="false" %>
         text-color: blue;
       }
       .btn {
-            border: none;
-            padding: 10px 20px; /* Adds padding around the text */
-            font-size: 16px; /* Increases the font size */
-            color: white; /* Text color */
-            background-color: #007BFF; /* Button background color */
-            border: none; /* Removes any border */
-            border-radius: 5px; /* Rounds the corners */
-            text-decoration: none; /* Removes underline from the link */
-            text-align: center; /* Centers the text */
-            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-        }
+        border: none;
+        padding: 10px 20px; /* Adds padding around the text */
+        font-size: 16px; /* Increases the font size */
+        color: white; /* Text color */
+        background-color: #007bff; /* Button background color */
+        border: none; /* Removes any border */
+        border-radius: 5px; /* Rounds the corners */
+        text-decoration: none; /* Removes underline from the link */
+        text-align: center; /* Centers the text */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+      }
     </style>
     <script src="static/js/jquery.js"></script>
     <script>
@@ -107,7 +107,9 @@ isELIgnored="false" %>
             <td>${u.startDate}</td>
             <td>${u.endDate}</td>
             <td>
-                <a href="donation_form?campaignId=${u.campaignId}" class="btn">Donate now</a>
+              <a href="donation_form?campaignId=${u.campaignId}" class="btn"
+                >Donate</a
+              >
             </td>
           </tr>
         </c:forEach>

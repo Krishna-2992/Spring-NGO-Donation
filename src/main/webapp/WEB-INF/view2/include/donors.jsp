@@ -25,9 +25,9 @@
           }
 
           .user-table thead {
-            background-color: #4caf50;
-            color: white;
-          }
+              background-color: #3498db;
+              color: white;
+            }
 
           .user-table th,
           .user-table td {

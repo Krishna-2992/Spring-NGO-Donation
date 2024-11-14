@@ -7,7 +7,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Contact List - Contact Application</title>
+    <title>DonationList - NGO Donation</title>
     <link href="static/css/style.css" rel="stylesheet" type="text/css" />
     <style>
       body {
@@ -33,12 +33,12 @@
       <tr>
         <td height="350px" valign="top">
           <%-- Page Content Area--%>
-          <h3>Contact List</h3>
+          <h3>DonationList</h3>
           <c:if test="${param.act eq 'sv'}">
-              <p class="success">Contact Saved Successfully</p>
+              <p class="success">DonationSaved Successfully</p>
           </c:if>
           <c:if test="${param.act eq 'del'}">
-                <p class="success">Contact Deleted Successfully</p>
+                <p class="success">DonationDeleted Successfully</p>
             </c:if>
 
             <table width="100%">

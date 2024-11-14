@@ -8,7 +8,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>User Login - Contact Application</title>
+    <title>User Login - NGO Donation</title>
     <link href="static/css/style.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -52,7 +52,7 @@
         <p class="error">${err}</p>
       </c:if>
       <c:if test="${param.act eq 'lo'}">
-        <p class="success">Logout Successfully! Thanks for using contact application.</p>
+        <p class="success">Logout Successfully! Thanks for using NGO Donation.</p>
       </c:if>
       <c:if test="${param.act eq 'reg'}">
         <p class="success">User Registered Successfully. Please login</p>

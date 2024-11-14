@@ -1,21 +1,23 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page isELIgnored="false" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@taglib
+uri="http://www.springframework.org/tags" prefix="s" %> <%@taglib
+uri="http://www.springframework.org/tags/form" prefix="f" %> <%@taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ page
+isELIgnored="false" %>
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>User Login - Contact Application</title>
+    <title>User Login - NGO Donation</title>
     <link href="static/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <style>
       body {
-        font-family: 'Roboto', Arial, sans-serif;
+        font-family: "Roboto", Arial, sans-serif;
         background-color: #f5f5f5;
-
       }
       .login-form {
         max-width: 400px;
@@ -23,7 +25,7 @@
         background-color: white;
         padding: 30px;
         border-radius: 5px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       }
       .form-control {
         border-radius: 3px;
@@ -52,12 +54,13 @@
         <p class="error">${err}</p>
       </c:if>
       <c:if test="${param.act eq 'lo'}">
-        <p class="success">Logout Successfully! Thanks for using contact application.</p>
+        <p class="success">
+          Logout Successfully! Thanks for using NGO Donation.
+        </p>
       </c:if>
       <c:if test="${param.act eq 'reg'}">
         <p class="success">User Registered Successfully. Please login</p>
       </c:if>
-
 
       <f:form action="donate" modelAttribute="command" class="mb-3">
         <div class="mb-3">
@@ -68,8 +71,6 @@
           <button class="btn btn-primary">Donate</button>
         </div>
       </f:form>
-
-
     </div>
   </body>
 </html>
