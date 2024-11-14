@@ -62,14 +62,14 @@
     <div class="user-links">
         <c:if test="${userId==null}">
             <!-- Guest menu -->
-            <a href="campaigns" class="guest-link">Home</a> |
+            <a href="campaigns" class="guest-link">Campaigns</a> |
             <a href="login_form" class="guest-link">Login</a> |
             <a href="reg_form" class="guest-link">Register</a>
         </c:if>
 
         <c:if test="${userId!=null && role == 'Admin'}">
             <!-- Admin menu -->
-            <a href="campaigns" class="admin-link">Home</a> |
+            <a href="campaigns" class="admin-link">Campaigns</a> |
             <a href="donors" class="admin-link">Donors</a> |
             <a href="donations" class="admin-link">Donations</a> |
             <a href="logout" class="admin-link">Logout</a>
@@ -77,7 +77,7 @@
 
         <c:if test="${userId!=null && role == 'Donor'}">
             <!-- Donor menu -->
-            <a href="campaigns" class="donor-link">Home</a> |
+            <a href="campaigns" class="donor-link">Campaigns</a> |
             <a href="donations" class="donor-link">Donations</a> |
             <a href="logout" class="donor-link">Logout</a>
         </c:if>

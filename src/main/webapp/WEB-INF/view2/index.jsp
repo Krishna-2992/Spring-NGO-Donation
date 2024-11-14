@@ -91,6 +91,7 @@ isELIgnored="false" %>
             <a href="campaigns" class="btn">View Campaigns</a>
           </c:if>
           <c:if test="${campaignFetched=='true'}">
+            <a href="campaigns" class="btn">Campaigns</a>
             <jsp:include page="include/campaigns.jsp" />
           </c:if>
         </c:if>
