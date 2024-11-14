@@ -44,10 +44,11 @@ public class DonationController {
         return "index";
     }
 
-    @RequestMapping(value="/listDonations")
-    public String listDonations(Model m, HttpSession session) {
+    @RequestMapping(value="/donations")
+    public String donationPage(Model m, HttpSession session) {
         m.addAttribute("donationList", donationService.getAllDonations());
-        return "donations"; //JSP
+        session.setAttribute("currentPage", "Donations");
+        return "index";
     }
 
 }

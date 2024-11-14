@@ -57,7 +57,6 @@ public class UserController {
     public String handleLogin(@ModelAttribute("command") LoginCommand cmd, Model m, HttpSession session) {
             System.out.println("inside user login");
             User loggedInUser = userService.login(cmd.getLoginName(), cmd.getPassword());
-            System.out.println(loggedInUser);
             if(loggedInUser == null) {
                 m.addAttribute("err", "Login failed enter valid credentials");
                 return "index";
@@ -65,15 +64,14 @@ public class UserController {
                 //success
                 // check role and redirect to appropriate dashboard
                 if(loggedInUser.getRole().equals("Admin")) {
-                    System.out.println("trying to login admin");
                     addUserInSession(loggedInUser, session);
                     System.out.println("route to dashboard_admin");
-                    return "dashboard_admin";
+                    return "index";
                 }else if (loggedInUser.getRole().equals("Donor")) {
                     addUserInSession(loggedInUser, session);
                     System.out.println("route to dashboard_user");
                     System.out.println(loggedInUser);
-                    return "dashboard_user";
+                    return "index";
                 } else {
                     m.addAttribute("err", "invalid user role");
                     return "index";
@@ -89,13 +87,11 @@ public class UserController {
 
     @RequestMapping(value = "/user_dashboard")
     public String userDashboard() {
-        System.out.println("user dashboard");
         return "dashboard_user"; // /WEB-INF/view/index.jsp
     }
 
     @RequestMapping(value = "/admin_dashboard")
     public String adminDashboard() {
-        System.out.println("admin dashboard");
         return "dashboard_admin"; // /WEB-INF/view/index.jsp
     }
 
@@ -127,6 +123,13 @@ public class UserController {
             e.printStackTrace();
             return "ERROR: Unable to Change Status";
         }
+    }
+
+    @RequestMapping(value="/donors")
+    public String donationPage(Model m, HttpSession session) {
+        m.addAttribute("userList", userService.getUserList());
+        session.setAttribute("currentPage", "Donors");
+        return "index";
     }
 
     private void addUserInSession(User u, HttpSession session) {

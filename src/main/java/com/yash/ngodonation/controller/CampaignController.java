@@ -20,8 +20,8 @@ public class CampaignController {
     @RequestMapping(value = "/campaigns")
     public String getAllCampaigns(Model m, HttpSession session) {
         m.addAttribute("campaignList", campaignService.getAllCampaigns());
+        session.setAttribute("currentPage", "Campaigns");
         session.setAttribute("campaignList", campaignService.getAllCampaigns());
-        m.addAttribute("campaignFetched", "true");
         session.setAttribute("campaignFetched", "true");
         return "index"; //JSP
     }

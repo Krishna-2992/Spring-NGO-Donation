@@ -1,1 +1,1 @@
-&COPY;[2020-2024] Copyrights by <a target="_blank" href="http://ezeontech.com">Yash Technologies</a>
+&COPY;[2020-2024] Copyrights by <a target="_blank" href="https://www.yash.com/">Yash Technologies</a>
