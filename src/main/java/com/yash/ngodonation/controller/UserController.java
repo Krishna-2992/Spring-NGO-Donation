@@ -25,11 +25,12 @@ public class UserController {
         return "index"; // /WEB-INF/view/index.jsp
     }
 
-    @RequestMapping(value = "/reg_form")
+    @RequestMapping(value = "/register_form")
     public String registrationForm(Model m) {
+        System.out.println("registration form invoked!!");
         UserCommand cmd = new UserCommand();
         m.addAttribute("command", cmd);
-        return "register";//JSP
+        return "index";//JSP
     }
 
     @RequestMapping(value = "/register_user")
@@ -50,10 +51,10 @@ public class UserController {
     public String loginForm(Model m) {
         LoginCommand cmd = new LoginCommand();
         m.addAttribute("command", cmd);
-        return "login";//JSP
+        return "index";//JSP
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     public String handleLogin(@ModelAttribute("command") LoginCommand cmd, Model m, HttpSession session) {
             System.out.println("inside user login");
             User loggedInUser = userService.login(cmd.getLoginName(), cmd.getPassword());
