@@ -9,6 +9,15 @@ public class User {
     private String loginName;
     private String password;
     private String role;
+    private String panNumber;
+
+    public String getPanNumber() {
+        return panNumber;
+    }
+
+    public void setPanNumber(String panNumber) {
+        this.panNumber = panNumber;
+    }
 
     public User() {};
 
@@ -86,7 +95,8 @@ public class User {
                 ", address='" + address + '\'' +
                 ", loginName='" + loginName + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
+                ", role='" + role + '\'' +
+                ", panNumber='" + panNumber + '\'' +
                 '}';
     }
 }

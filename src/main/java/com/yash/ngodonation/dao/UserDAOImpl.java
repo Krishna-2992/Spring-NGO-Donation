@@ -18,8 +18,8 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 
     @Override
     public void save(User u) {
-        String sql = "INSERT INTO user(name, phone, email, address, loginName, password)"
-                + " VALUES(:name, :phone, :email, :address, :loginName, :password)";
+        String sql = "INSERT INTO user(name, phone, email, address, loginName, password, panNumber)"
+                + " VALUES(:name, :phone, :email, :address, :loginName, :password, :panNumber)";
 
         Map<String, Object> m = new HashMap<>();
         m.put("name", u.getName());
@@ -28,6 +28,7 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
         m.put("address", u.getAddress());
         m.put("loginName", u.getLoginName());
         m.put("password", u.getPassword());
+        m.put("panNumber", u.getPanNumber());
 
         KeyHolder kh = new GeneratedKeyHolder();
         SqlParameterSource ps = new MapSqlParameterSource(m);

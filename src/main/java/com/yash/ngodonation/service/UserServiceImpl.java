@@ -20,13 +20,12 @@ public class UserServiceImpl extends BaseDAO implements UserService {
 
     @Override
     public void register(User u) {
-        System.out.println("service -> register");
         userDAO.save(u);
     }
 
     @Override
     public User login(String loginName, String password)  {
-        String sql = "SELECT userId, name, phone, email, address, role, loginName " +
+        String sql = "SELECT userId, name, phone, email, address, role, loginName, password, panNumber " +
                 "from user where loginName=:ln and password=:pw";
         Map m = new HashMap();
         m.put("ln", loginName);

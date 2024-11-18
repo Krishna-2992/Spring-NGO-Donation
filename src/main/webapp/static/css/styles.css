@@ -145,6 +145,7 @@
         }
 
         .card {
+            text-decoration: none;
             background: white;
             border-radius: 20px;
             padding: 2rem;
@@ -157,6 +158,7 @@
         }
 
         .card-icon {
+            text-decoration: none;
             width: 60px;
             height: 60px;
             background: #FFE3E3;
@@ -583,3 +585,14 @@
                         .social-auth {
                             margin: 1rem 0;
                         }
+        .success {
+            color: #FF6B6B;
+        }
+        .card-link {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .card-link:hover {
+                text-decoration: none;
+            }

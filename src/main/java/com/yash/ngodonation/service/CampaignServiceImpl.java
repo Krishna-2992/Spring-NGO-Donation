@@ -21,7 +21,7 @@ public class CampaignServiceImpl implements CampaignService{
 
     @Override
     public Campaign getCampaignById(int campaignId) {
-        return null;
+        return campaignDAO.getCampaignById(campaignId);
     }
 
     @Override

@@ -4,10 +4,13 @@ import com.yash.ngodonation.domain.Campaign;
 import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.rm.CampaignRowMapper;
 import com.yash.ngodonation.rm.UserRowMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CampaignDAOImpl extends BaseDAO implements CampaignDAO{
@@ -25,7 +28,14 @@ public class CampaignDAOImpl extends BaseDAO implements CampaignDAO{
 
     @Override
     public Campaign getCampaignById(int campaignId) {
-        return null;
+        String sql = "SELECT campaignId, title, description, fundRaised, targetAmount, startDate, endDate" +
+                " from campaign where campaignId=:ci";
+
+        Map m = new HashMap();
+        m.put("ci", campaignId);
+
+        Campaign campaign = getNamedParameterJdbcTemplate().queryForObject(sql, m, new CampaignRowMapper());
+        return campaign;
     }
 
     @Override

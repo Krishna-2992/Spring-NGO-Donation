@@ -1,3 +1,10 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@taglib
+uri="http://www.springframework.org/tags" prefix="s" %> <%@taglib
+uri="http://www.springframework.org/tags/form" prefix="f" %> <%@taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ page
+isELIgnored="false" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +23,6 @@
     <!-- Navbar -->
         <jsp:include page="include/navbar.jsp" />
 
-        <!-- Login Modal -->
-        <jsp:include page="include/loginModal.jsp" />
-
-
-        <!-- Register Modal -->
-        <jsp:include page="include/registerModal.jsp" />
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -31,6 +32,40 @@
             <a href="#donate" class="donate-btn">Donate Now</a>
         </div>
     </section>
+
+    <!------ campaigns --->
+    <table id="donorsTable" class="user-table">
+          <thead>
+            <tr>
+              <th>Campaign ID</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Fund Raised</th>
+              <th>Target Amount</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <c:forEach var="u" items="${campaignList}">
+              <tr>
+                <td>${u.campaignId}</td>
+                <td>${u.title}</td>
+                <td>${u.description}</td>
+                <td>${u.fundRaised}</td>
+                <td>${u.targetAmount}</td>
+                <td>${u.startDate}</td>
+                <td>${u.endDate}</td>
+                <td>
+                  <a href="donation_form?campaignId=${u.campaignId}" class="btn"
+                    >Donate</a
+                  >
+                </td>
+              </tr>
+            </c:forEach>
+          </tbody>
+        </table>
 
     <!-- About Section -->
     <section class="section" id="about">
@@ -76,25 +111,19 @@
         </div>
     </div>
 
-    <!-- Causes Section -->
+    <!-- Campaigns Section -->
     <section class="section" id="causes">
         <h2 class="section-title">Our Causes</h2>
         <div class="cards-container">
-            <div class="card">
-                <div class="card-icon">📚</div>
-                <h3>Education</h3>
-                <p>Providing quality education and learning resources to underprivileged children.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🏥</div>
-                <h3>Healthcare</h3>
-                <p>Ensuring accessible healthcare services to remote communities.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🌱</div>
-                <h3>Environment</h3>
-                <p>Working towards a sustainable future through environmental conservation.</p>
-            </div>
+
+            <c:forEach var="u" items="${campaignList}">
+                <a class="card no-link" href="campaign?id=${u.campaignId}">
+                    <div class="card-icon">🎨</div>
+                    <h3>${u.title}</h3>
+                    <p>${u.description}</p>
+                </a>
+            </c:forEach>
+
         </div>
     </section>
 

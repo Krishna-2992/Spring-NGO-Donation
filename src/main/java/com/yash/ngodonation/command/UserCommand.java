@@ -5,7 +5,6 @@ import com.yash.ngodonation.domain.User;
 
 public class UserCommand {
     User user;
-    //TODO: more fieds if required
 
     public User getUser() {
         return user;

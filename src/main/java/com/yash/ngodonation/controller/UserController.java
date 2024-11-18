@@ -4,6 +4,7 @@ import com.yash.ngodonation.command.LoginCommand;
 import com.yash.ngodonation.command.UserCommand;
 import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.exception.UserBlockedException;
+import com.yash.ngodonation.service.CampaignService;
 import com.yash.ngodonation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -19,18 +20,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CampaignService campaignService;
+
     @RequestMapping(value = {"/", "/index"})
-    public String index(Model m) {
+    public String index(Model m, HttpSession session) {
+        System.out.println("index page");
         m.addAttribute("command", new LoginCommand());
+        m.addAttribute("campaignList", campaignService.getAllCampaigns());
         return "index"; // /WEB-INF/view/index.jsp
     }
 
-    @RequestMapping(value = "/register_form")
+    @RequestMapping(value = "/register")
     public String registrationForm(Model m) {
         System.out.println("registration form invoked!!");
         UserCommand cmd = new UserCommand();
         m.addAttribute("command", cmd);
-        return "index";//JSP
+        return "registerForm";//JSP
     }
 
     @RequestMapping(value = "/register_user")
@@ -38,8 +44,9 @@ public class UserController {
         try {
             System.out.println("usercontroller -> register");
             User user = cmd.getUser();
+            System.out.println("User before registration: " + user);
             userService.register(user);
-            return "redirect:index?act=reg"; //Login Page
+            return "redirect:login?act=reg"; //Login Page
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
             m.addAttribute("err", "Username is already registered. Please select another username.");
@@ -47,14 +54,14 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/login_form")
+    @RequestMapping(value = "/login")
     public String loginForm(Model m) {
         LoginCommand cmd = new LoginCommand();
         m.addAttribute("command", cmd);
-        return "index";//JSP
+        return "loginForm";//JSP
     }
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login_user")
     public String handleLogin(@ModelAttribute("command") LoginCommand cmd, Model m, HttpSession session) {
             System.out.println("inside user login");
             User loggedInUser = userService.login(cmd.getLoginName(), cmd.getPassword());

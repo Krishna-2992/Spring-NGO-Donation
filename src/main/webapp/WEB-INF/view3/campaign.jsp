@@ -1,0 +1,123 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@taglib
+uri="http://www.springframework.org/tags" prefix="s" %> <%@taglib
+uri="http://www.springframework.org/tags/form" prefix="f" %> <%@taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ page
+isELIgnored="false" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Details</title>
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/auth-styles.css">
+    <link rel="stylesheet" href="static/css/campaign.css">
+
+     <script>
+            function selectAmount(button, amount) {
+                // Remove active class from all buttons
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Clear custom amount input
+                document.getElementById('customAmount').value = '';
+
+                // Update hidden input with selected amount
+                document.getElementById('selectedAmount').value = amount;
+            }
+
+            function handleCustomAmount(input) {
+                // Remove active class from preset amount buttons
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Update hidden input with custom amount
+                document.getElementById('selectedAmount').value = input.value;
+            }
+
+            function validateDonation() {
+                const amount = document.getElementById('selectedAmount').value;
+                if (!amount || amount <= 0) {
+                    alert('Please select or enter a valid donation amount');
+                    return false;
+                }
+                return true;
+            }
+        </script>
+</head>
+<body>
+
+    <!------ campaigns --->
+
+    <c:forEach var="u" items="${campaignList}">
+        <c:if test="${param.id eq u.campaignId}">
+            <div class="container">
+                <div class="campaign-header">
+                    <h1 class="campaign-title">${u.title}</h1>
+                    <p class="campaign-description">
+                        ${u.description}
+                    </p>
+                </div>
+
+                <div class="campaign-stats">
+                    <div class="amounts">
+                        <span class="amount-raised">$${u.fundRaised}</span>
+                        <span class="target-amount">raised of $${u.targetAmount} goal</span>
+                    </div>
+                    <div class="progress-container">
+                        <c:set var="progressPercentage" value="${(u.fundRaised / u.targetAmount) * 100}" />
+                        <div class="progress-bar" style="width: ${progressPercentage > 100 ? '100' : progressPercentage}%"></div>
+                        <span class="progress-text">${String.format("%.1f", progressPercentage)}%</span>
+                    </div>
+                    <div class="campaign-meta">
+                        <div class="meta-item">
+                            <div class="meta-label">Donors</div>
+                            <div class="meta-value">247</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Start Date</div>
+                            <div class="meta-value">${u.startDate}</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">End Date</div>
+                            <div class="meta-value">${u.endDate}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donation-section">
+                    <h2 class="donation-title">Make a Donation</h2>
+                    <form onsubmit="return validateDonation()">
+                        <input type="hidden" id="selectedAmount" name="donationAmount" value="">
+                        <input type="hidden" name="campaignId" value="${u.campaignId}">
+
+                        <div class="donation-amounts">
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 25)">$25</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 50)">$50</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 100)">$100</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 200)">$200</button>
+                        </div>
+
+                        <input type="number"
+                               id="customAmount"
+                               class="custom-amount"
+                               placeholder="Enter custom amount"
+                               oninput="handleCustomAmount(this)"
+                               min="1">
+
+                        <button type="submit" class="donate-btn">Donate Now</button>
+                    </form>
+
+                </div>
+            </div>
+        </c:if>
+    </c:forEach>
+</body>
+</html>
