@@ -4,6 +4,7 @@ import com.yash.ngodonation.command.DonationCommand;
 import com.yash.ngodonation.command.LoginCommand;
 import com.yash.ngodonation.command.UserCommand;
 import com.yash.ngodonation.domain.Donation;
+import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.service.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,22 +34,19 @@ public class DonationController {
     }
 
     @RequestMapping(value="/donate")
-    public String donate(@ModelAttribute("command") DonationCommand cmd, Model m, HttpSession session) {
+    public String donate(@ModelAttribute("command") DonationCommand cmd, Model m, @RequestParam String campaignId, HttpSession session) {
         // Implement the logic for payment gateway
         Integer userId = (Integer) session.getAttribute("userId");
-        String campaignIdString = (String) session.getAttribute("donationCampaignId");
-        int campaignId = Integer.parseInt(campaignIdString);
-        System.out.println("donationController -> donate");
-        donationService.addDonation(userId, campaignId, cmd.getAmount());
-        System.out.println("label10");
-        return "index";
+        if(userId==null) return "redirect:login";
+        donationService.addDonation(userId, Integer.parseInt(campaignId), cmd.getAmount());
+        return "redirect:index";
     }
 
     @RequestMapping(value="/donations")
     public String donationPage(Model m, HttpSession session) {
         m.addAttribute("donationList", donationService.getAllDonations());
         session.setAttribute("currentPage", "Donations");
-        return "index";
+        return "donations";
     }
 
 }

@@ -25,25 +25,11 @@ isELIgnored="false" %>
                 // Add active class to clicked button
                 button.classList.add('active');
 
-                // Clear custom amount input
-                document.getElementById('customAmount').value = '';
-
-                // Update hidden input with selected amount
-                document.getElementById('selectedAmount').value = amount;
-            }
-
-            function handleCustomAmount(input) {
-                // Remove active class from preset amount buttons
-                document.querySelectorAll('.amount-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-
-                // Update hidden input with custom amount
-                document.getElementById('selectedAmount').value = input.value;
+                document.getElementById('id-custom-amount').value = amount;
             }
 
             function validateDonation() {
-                const amount = document.getElementById('selectedAmount').value;
+                const amount = document.getElementById('id-custom-amount').value;
                 if (!amount || amount <= 0) {
                     alert('Please select or enter a valid donation amount');
                     return false;
@@ -53,6 +39,8 @@ isELIgnored="false" %>
         </script>
 </head>
 <body>
+
+    <jsp:include page="include/navbar.jsp" />
 
     <!------ campaigns --->
 
@@ -68,8 +56,8 @@ isELIgnored="false" %>
 
                 <div class="campaign-stats">
                     <div class="amounts">
-                        <span class="amount-raised">$${u.fundRaised}</span>
-                        <span class="target-amount">raised of $${u.targetAmount} goal</span>
+                        <span class="amount-raised">₹${u.fundRaised}</span>
+                        <span class="target-amount">raised of ₹${u.targetAmount} goal</span>
                     </div>
                     <div class="progress-container">
                         <c:set var="progressPercentage" value="${(u.fundRaised / u.targetAmount) * 100}" />
@@ -94,26 +82,18 @@ isELIgnored="false" %>
 
                 <div class="donation-section">
                     <h2 class="donation-title">Make a Donation</h2>
-                    <form onsubmit="return validateDonation()">
-                        <input type="hidden" id="selectedAmount" name="donationAmount" value="">
-                        <input type="hidden" name="campaignId" value="${u.campaignId}">
+                    <f:form action="donate?campaignId=${param.id}" modelAttribute="command">
 
                         <div class="donation-amounts">
-                            <button type="button" class="amount-btn" onclick="selectAmount(this, 25)">$25</button>
-                            <button type="button" class="amount-btn" onclick="selectAmount(this, 50)">$50</button>
-                            <button type="button" class="amount-btn" onclick="selectAmount(this, 100)">$100</button>
-                            <button type="button" class="amount-btn" onclick="selectAmount(this, 200)">$200</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 25)">₹25</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 50)">₹50</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 100)">₹100</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(this, 200)">₹200</button>
                         </div>
 
-                        <input type="number"
-                               id="customAmount"
-                               class="custom-amount"
-                               placeholder="Enter custom amount"
-                               oninput="handleCustomAmount(this)"
-                               min="1">
-
+                        <f:input path="amount" class="custom-amount" id="id-custom-amount" placeholder="Enter custom amount"/>
                         <button type="submit" class="donate-btn">Donate Now</button>
-                    </form>
+                    </f:form>
 
                 </div>
             </div>

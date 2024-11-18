@@ -29,65 +29,29 @@ isELIgnored="false" %>
         <div class="hero-content">
             <h1>Together We Can Make A Difference</h1>
             <p>Your generosity today creates a better tomorrow. Join us in bringing hope, help, and positive change to those who need it most.</p>
-            <a href="#donate" class="donate-btn">Donate Now</a>
+            <a href="#campaigns" class="donate-btn">Donate Now</a>
         </div>
     </section>
 
-    <!------ campaigns --->
-    <table id="donorsTable" class="user-table">
-          <thead>
-            <tr>
-              <th>Campaign ID</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Fund Raised</th>
-              <th>Target Amount</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <c:forEach var="u" items="${campaignList}">
-              <tr>
-                <td>${u.campaignId}</td>
-                <td>${u.title}</td>
-                <td>${u.description}</td>
-                <td>${u.fundRaised}</td>
-                <td>${u.targetAmount}</td>
-                <td>${u.startDate}</td>
-                <td>${u.endDate}</td>
-                <td>
-                  <a href="donation_form?campaignId=${u.campaignId}" class="btn"
-                    >Donate</a
-                  >
-                </td>
-              </tr>
-            </c:forEach>
-          </tbody>
-        </table>
+    <!-- Campaigns Section -->
+        <section class="section" id="campaigns">
+            <h2 class="section-title">Our Campaigns</h2>
+            <div class="cards-container">
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <h2 class="section-title">Why Choose Us</h2>
-        <div class="cards-container">
-            <div class="card">
-                <div class="card-icon">💡</div>
-                <h3>Our Mission</h3>
-                <p>Dedicated to creating lasting change through sustainable development and community empowerment.</p>
+                <c:forEach var="u" items="${campaignList}">
+                    <a class="card no-link" href="campaign?id=${u.campaignId}">
+                        <div class="card-icon">
+                            <c:if test="${u.campaignId eq 1}">🎨</c:if>
+                            <c:if test="${u.campaignId eq 2}">🌱</c:if>
+                            <c:if test="${u.campaignId eq 3}">👨🏻‍🎓</c:if>
+                        </div>
+                        <h3>${u.title}</h3>
+                        <p>${u.description}</p>
+                    </a>
+                </c:forEach>
+
             </div>
-            <div class="card">
-                <div class="card-icon">🤝</div>
-                <h3>Transparency</h3>
-                <p>100% transparency in how your donations are used, with regular updates on project progress.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🌍</div>
-                <h3>Global Impact</h3>
-                <p>Creating positive change across communities worldwide through focused initiatives.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
     <!-- Impact Numbers -->
     <div class="impact-numbers">
@@ -97,8 +61,8 @@ isELIgnored="false" %>
                 <p>Lives Impacted</p>
             </div>
             <div class="number-card">
-                <h3>50+</h3>
-                <p>Active Projects</p>
+                <h3>3</h3>
+                <p>Campaign</p>
             </div>
             <div class="number-card">
                 <h3>100+</h3>
@@ -111,21 +75,27 @@ isELIgnored="false" %>
         </div>
     </div>
 
-    <!-- Campaigns Section -->
-    <section class="section" id="causes">
-        <h2 class="section-title">Our Causes</h2>
-        <div class="cards-container">
-
-            <c:forEach var="u" items="${campaignList}">
-                <a class="card no-link" href="campaign?id=${u.campaignId}">
-                    <div class="card-icon">🎨</div>
-                    <h3>${u.title}</h3>
-                    <p>${u.description}</p>
-                </a>
-            </c:forEach>
-
-        </div>
-    </section>
+     <!-- About Section -->
+        <section class="section" id="about">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-icon">💡</div>
+                    <h3>Our Mission</h3>
+                    <p>Dedicated to creating lasting change through sustainable development and community empowerment.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Transparency</h3>
+                    <p>100% transparency in how your donations are used, with regular updates on project progress.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌍</div>
+                    <h3>Global Impact</h3>
+                    <p>Creating positive change across communities worldwide through focused initiatives.</p>
+                </div>
+            </div>
+        </section>
 
     <!-- Contact Section -->
     <section class="section" id="contact">
@@ -152,11 +122,11 @@ isELIgnored="false" %>
         <div class="footer-content">
             <div class="footer-section">
                 <h4>About Us</h4>
-                <p>HopeHarbor is committed to making a positive impact through sustainable development and community empowerment.</p>
+                <p>We are committed to making a positive impact through sustainable development and community empowerment.</p>
             </div>
             <div class="footer-section">
                 <h4>Contact Info</h4>
-                <p>Email: info@hopeharbor.org</p>
+                <p>Email: info@ngodonation.org</p>
                 <p>Phone: +1 (555) 123-4567</p>
                 <p>Address: 123 Hope Street, Charity City</p>
             </div>

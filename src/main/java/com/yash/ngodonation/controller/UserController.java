@@ -67,22 +67,22 @@ public class UserController {
             User loggedInUser = userService.login(cmd.getLoginName(), cmd.getPassword());
             if(loggedInUser == null) {
                 m.addAttribute("err", "Login failed enter valid credentials");
-                return "index";
+                return "redirect:index";
             } else {
                 //success
                 // check role and redirect to appropriate dashboard
                 if(loggedInUser.getRole().equals("Admin")) {
                     addUserInSession(loggedInUser, session);
                     System.out.println("route to dashboard_admin");
-                    return "index";
+                    return "redirect:index";
                 }else if (loggedInUser.getRole().equals("Donor")) {
                     addUserInSession(loggedInUser, session);
                     System.out.println("route to dashboard_user");
                     System.out.println(loggedInUser);
-                    return "index";
+                    return "redirect:index";
                 } else {
                     m.addAttribute("err", "invalid user role");
-                    return "index";
+                    return "redirect:index";
                 }
             }
     }
@@ -106,7 +106,7 @@ public class UserController {
     @RequestMapping(value = "/admin_users")
     public String getUserList(Model m) {
         m.addAttribute("userList", userService.getUserList());
-        return "users"; //JSP
+        return "donors"; //JSP
     }
 
 
