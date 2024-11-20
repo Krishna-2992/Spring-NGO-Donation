@@ -4,6 +4,7 @@ import com.yash.ngodonation.command.DonationCommand;
 import com.yash.ngodonation.command.LoginCommand;
 import com.yash.ngodonation.command.UserCommand;
 import com.yash.ngodonation.domain.Donation;
+import com.yash.ngodonation.domain.DonationDetail;
 import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.service.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class DonationController {
@@ -38,13 +40,16 @@ public class DonationController {
         // Implement the logic for payment gateway
         Integer userId = (Integer) session.getAttribute("userId");
         if(userId==null) return "redirect:login";
-        donationService.addDonation(userId, Integer.parseInt(campaignId), cmd.getAmount());
+        donationService.handleDonation(userId, Integer.parseInt(campaignId), cmd.getAmount());
         return "redirect:index";
     }
 
     @RequestMapping(value="/donations")
     public String donationPage(Model m, HttpSession session) {
         m.addAttribute("donationList", donationService.getAllDonations());
+        List<DonationDetail> donationDetailList = donationService.getAllDonationDetails();
+        System.out.println("donationdetailList: "+ donationDetailList);
+        m.addAttribute("donationDetailList", donationDetailList);
         session.setAttribute("currentPage", "Donations");
         return "donations";
     }

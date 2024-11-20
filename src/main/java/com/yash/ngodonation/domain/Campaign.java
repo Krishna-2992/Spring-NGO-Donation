@@ -8,6 +8,15 @@ public class Campaign {
     private String targetAmount;
     private String startDate;
     private String endDate;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getCampaignId() {
         return campaignId;
@@ -68,13 +77,14 @@ public class Campaign {
     @Override
     public String toString() {
         return "Campaign{" +
-                "campaignId='" + campaignId + '\'' +
+                "campaignId=" + campaignId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", fundRaised='" + fundRaised + '\'' +
                 ", targetAmount='" + targetAmount + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

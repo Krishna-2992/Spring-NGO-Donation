@@ -1,7 +1,9 @@
 package com.yash.ngodonation.dao;
 
 import com.yash.ngodonation.domain.Donation;
+import com.yash.ngodonation.domain.DonationDetail;
 import com.yash.ngodonation.domain.User;
+import com.yash.ngodonation.rm.DonationDetailRowMapper;
 import com.yash.ngodonation.rm.DonationRowMapper;
 import com.yash.ngodonation.rm.UserRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -21,6 +23,24 @@ public class DonationDAOImpl extends BaseDAO implements DonationDAO{
     public List<Donation> getAllDonations() {
         String sql = "select * from donation";
         List<Donation> donations = getJdbcTemplate().query(sql, new DonationRowMapper());
+        return donations;
+    }
+
+    @Override
+    public List<DonationDetail> getAllDonationDetails() {
+        String sqlQuery =
+                "SELECT " +
+                        "d.donationId, " +
+                        "c.title as campaignTitle, " +
+                        "u.name as donorName, " +
+                        "u.phone as donorPhone, " +
+                        "d.amount as donationAmount, " +
+                        "d.date as donationDate " +
+                        "FROM donation d " +
+                        "INNER JOIN user u ON d.donorId = u.userId " +
+                        "INNER JOIN campaign c ON d.campaignId = c.campaignId " +
+                        "ORDER BY d.donationId";
+        List<DonationDetail> donations = getJdbcTemplate().query(sqlQuery, new DonationDetailRowMapper());
         return donations;
     }
 

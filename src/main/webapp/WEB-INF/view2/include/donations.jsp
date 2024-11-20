@@ -85,3 +85,52 @@
         </c:forEach>
       </tbody>
      </table>
+
+     <table id="donorsTable" class="user-table">
+           <thead>
+             <tr>
+               <th>DonationId</th>
+               <th>DonorId</th>
+               <th>CampaignId</th>
+               <th>Amount</th>
+               <th>Donation Date</th>
+             </tr>
+           </thead>
+           <tbody>
+             <c:forEach var="u" items="${donationList}">
+               <tr>
+                 <td>${u.donationId}</td>
+                 <td>${u.donorId}</td>
+                 <td>${u.campaignId}</td>
+                 <td>${u.amount}</td>
+                 <td>${u.date}</td>
+               </tr>
+             </c:forEach>
+           </tbody>
+          </table>
+
+
+          <table id="donorsTable" class="user-table">
+              <thead>
+                  <tr>
+                      <th>Donation ID</th>
+                      <th>Campaign Title</th>
+                      <th>Donor Name</th>
+                      <th>Donor Phone</th>
+                      <th>Donation Amount</th>
+                      <th>Donation Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <c:forEach var="donation" items="${donationDetailList}">
+                      <tr>
+                          <td>${donation.donationId}</td>
+                          <td>${donation.campaignTitle}</td>
+                          <td>${donation.donorName}</td>
+                          <td>${donation.donorPhone}</td>
+                          <td>${donation.donationAmount}</td>
+                          <td>${donation.donationDate}</td>
+                      </tr>
+                  </c:forEach>
+              </tbody>
+          </table>

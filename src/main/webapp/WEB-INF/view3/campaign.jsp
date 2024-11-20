@@ -51,18 +51,21 @@ isELIgnored="false" %>
                     <h1 class="campaign-title">${u.title}</h1>
                     <p class="campaign-description">
                         ${u.description}
+                        ${u.status}
                     </p>
                 </div>
-
+                <c:set var="progressPercentage" value="${(u.fundRaised / u.targetAmount) * 100}" />
                 <div class="campaign-stats">
                     <div class="amounts">
-                        <span class="amount-raised">₹${u.fundRaised}</span>
+                        <span class="amount-raised">
+                            ₹${u.fundRaised}
+                            <span class="progress-percentage">(${String.format("%.1f", progressPercentage)}%)</span>
+                        </span>
+
                         <span class="target-amount">raised of ₹${u.targetAmount} goal</span>
                     </div>
                     <div class="progress-container">
-                        <c:set var="progressPercentage" value="${(u.fundRaised / u.targetAmount) * 100}" />
                         <div class="progress-bar" style="width: ${progressPercentage > 100 ? '100' : progressPercentage}%"></div>
-                        <span class="progress-text">${String.format("%.1f", progressPercentage)}%</span>
                     </div>
                     <div class="campaign-meta">
                         <div class="meta-item">

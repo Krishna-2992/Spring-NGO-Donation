@@ -5,6 +5,8 @@ import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.rm.CampaignRowMapper;
 import com.yash.ngodonation.rm.UserRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
@@ -16,8 +18,7 @@ import java.util.Map;
 public class CampaignDAOImpl extends BaseDAO implements CampaignDAO{
     @Override
     public List<Campaign> getAllCampaigns() {
-        String sql = "SELECT campaignId, title, description, fundRaised, targetAmount, startDate, endDate" +
-                " from campaign";
+        String sql = "SELECT * from campaign";
         List<Campaign> campaigns = getJdbcTemplate().query(sql, new CampaignRowMapper());
         System.out.println("campaigns fetched!!");
         for(Campaign campaign: campaigns) {
@@ -28,8 +29,7 @@ public class CampaignDAOImpl extends BaseDAO implements CampaignDAO{
 
     @Override
     public Campaign getCampaignById(int campaignId) {
-        String sql = "SELECT campaignId, title, description, fundRaised, targetAmount, startDate, endDate" +
-                " from campaign where campaignId=:ci";
+        String sql = "SELECT * from campaign where campaignId=:ci";
 
         Map m = new HashMap();
         m.put("ci", campaignId);
@@ -45,6 +45,23 @@ public class CampaignDAOImpl extends BaseDAO implements CampaignDAO{
 
     @Override
     public void updateCampaign(Campaign campaign) {
+
+    }
+
+    @Override
+    public void updateCampaignAmount(int campaignId, int amount) {
+        System.out.println("campaign DAO -> updatecampaignamount");
+        String sqlQuery = "UPDATE campaign " +
+                "SET fundRaised = fundRaised + :fr " +
+                "WHERE campaignId = " + campaignId;
+
+        Map<String, Object> m = new HashMap<>();
+        m.put("fr", amount);
+        SqlParameterSource ps = new MapSqlParameterSource(m);
+
+        super.getNamedParameterJdbcTemplate().update(sqlQuery, ps);
+
+        System.out.println("campaign updated successfully");
 
     }
 

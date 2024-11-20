@@ -63,27 +63,30 @@ isELIgnored="false" %>
         <div class="donors-header">
             Donations List
         </div>
+
         <table class="donors-table">
             <thead>
                 <tr>
-                    <th>DONATION ID</th>
-                    <th>DONOR ID</th>
-                    <th>CAMPAIGN ID</th>
-                    <th>AMOUNT</th>
-                    <th>DONATION</th>
+                    <th>Donation ID</th>
+                    <th>Campaign Title</th>
+                    <th>Donor Name</th>
+                    <th>Donor Phone</th>
+                    <th>Donation Amount</th>
+                    <th>Donation Date</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="u" items="${donationList}">
-                  <tr>
-                    <td>${u.donationId}</td>
-                    <td>${u.donorId}</td>
-                    <td>${u.campaignId}</td>
-                    <td>${u.amount}</td>
-                    <td>${u.date}</td>
-                  </tr>
+                <c:forEach var="donation" items="${donationDetailList}">
+                    <tr>
+                        <td>${donation.donationId}</td>
+                        <td>${donation.campaignTitle}</td>
+                        <td>${donation.donorName}</td>
+                        <td>${donation.donorPhone}</td>
+                        <td>${donation.donationAmount}</td>
+                        <td>${donation.donationDate}</td>
+                    </tr>
                 </c:forEach>
-              </tbody>
+            </tbody>
         </table>
     </div>
     </div>

@@ -38,4 +38,9 @@ public class CampaignServiceImpl implements CampaignService{
     public void deleteCampaign(int campaignId) {
 
     }
+
+    @Override
+    public void addCampaignDonation(int amount) {
+        
+    }
 }

@@ -26,7 +26,6 @@ public class UserController {
     @RequestMapping(value = {"/", "/index"})
     public String index(Model m, HttpSession session) {
         System.out.println("index page");
-        m.addAttribute("command", new LoginCommand());
         m.addAttribute("campaignList", campaignService.getAllCampaigns());
         return "index"; // /WEB-INF/view/index.jsp
     }

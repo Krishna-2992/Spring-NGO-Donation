@@ -255,3 +255,9 @@
                 .custom-amount:focus {
                     border-color: #ff6b6b;
                 }
+
+                .progress-percentage {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: #776b6b;
+                }

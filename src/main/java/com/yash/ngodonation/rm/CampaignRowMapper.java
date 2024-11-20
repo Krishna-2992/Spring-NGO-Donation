@@ -20,6 +20,7 @@ public class CampaignRowMapper implements RowMapper<Campaign> {
         c.setTargetAmount(rs.getString("targetAmount"));
         c.setStartDate(rs.getString("startDate"));
         c.setEndDate(rs.getString("endDate"));
+        c.setStatus(rs.getString("status"));
         return c;
     }
 }

@@ -127,8 +127,8 @@ isELIgnored="false" %>
             <div class="footer-section">
                 <h4>Contact Info</h4>
                 <p>Email: info@ngodonation.org</p>
-                <p>Phone: +1 (555) 123-4567</p>
-                <p>Address: 123 Hope Street, Charity City</p>
+                <p>Phone: +91 7999609158</p>
+                <p>Address: Super Corridor, Indore</p>
             </div>
             <div class="footer-section">
                 <h4>Follow Us</h4>
