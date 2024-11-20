@@ -96,7 +96,11 @@ isELIgnored="false" %>
 
                         <f:input path="amount" class="custom-amount" id="id-custom-amount" placeholder="Enter custom amount"/>
                         <button type="submit" class="donate-btn">Donate Now</button>
+
                     </f:form>
+
+                    <a href="payment/create-order?amount=1000" class="payment-button">Pay ₹1000</a>
+
 
                 </div>
             </div>

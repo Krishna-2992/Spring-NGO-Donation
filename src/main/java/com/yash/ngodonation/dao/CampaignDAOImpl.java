@@ -20,10 +20,6 @@ public class CampaignDAOImpl extends BaseDAO implements CampaignDAO{
     public List<Campaign> getAllCampaigns() {
         String sql = "SELECT * from campaign";
         List<Campaign> campaigns = getJdbcTemplate().query(sql, new CampaignRowMapper());
-        System.out.println("campaigns fetched!!");
-        for(Campaign campaign: campaigns) {
-            System.out.println(campaign);
-        }
         return campaigns;
     }
 

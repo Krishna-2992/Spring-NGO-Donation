@@ -25,14 +25,12 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/index"})
     public String index(Model m, HttpSession session) {
-        System.out.println("index page");
         m.addAttribute("campaignList", campaignService.getAllCampaigns());
         return "index"; // /WEB-INF/view/index.jsp
     }
 
     @RequestMapping(value = "/register")
     public String registrationForm(Model m) {
-        System.out.println("registration form invoked!!");
         UserCommand cmd = new UserCommand();
         m.addAttribute("command", cmd);
         return "registerForm";//JSP
@@ -41,9 +39,7 @@ public class UserController {
     @RequestMapping(value = "/register_user")
     public String registerUser(@ModelAttribute("command") UserCommand cmd, Model m) {
         try {
-            System.out.println("usercontroller -> register");
             User user = cmd.getUser();
-            System.out.println("User before registration: " + user);
             userService.register(user);
             return "redirect:login?act=reg"; //Login Page
         } catch (DuplicateKeyException e) {
@@ -62,7 +58,7 @@ public class UserController {
 
     @RequestMapping(value = "/login_user")
     public String handleLogin(@ModelAttribute("command") LoginCommand cmd, Model m, HttpSession session) {
-            System.out.println("inside user login");
+        System.out.println("inside login controller!!");
             User loggedInUser = userService.login(cmd.getLoginName(), cmd.getPassword());
             if(loggedInUser == null) {
                 m.addAttribute("err", "Login failed enter valid credentials");
@@ -72,12 +68,9 @@ public class UserController {
                 // check role and redirect to appropriate dashboard
                 if(loggedInUser.getRole().equals("Admin")) {
                     addUserInSession(loggedInUser, session);
-                    System.out.println("route to dashboard_admin");
                     return "redirect:index";
                 }else if (loggedInUser.getRole().equals("Donor")) {
                     addUserInSession(loggedInUser, session);
-                    System.out.println("route to dashboard_user");
-                    System.out.println(loggedInUser);
                     return "redirect:index";
                 } else {
                     m.addAttribute("err", "invalid user role");

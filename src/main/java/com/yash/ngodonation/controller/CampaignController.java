@@ -28,11 +28,8 @@ public class CampaignController {
     @RequestMapping(value = "/campaign")
     public String getCampaign(Model m) {
         m.addAttribute("campaignList", campaignService.getAllCampaigns());
-        System.out.println("set camapaign inside campaignList");
-
         DonationCommand cmd = new DonationCommand();
         m.addAttribute("command", cmd);
-
         return "campaign";
     }
 }

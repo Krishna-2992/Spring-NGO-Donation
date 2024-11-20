@@ -1,116 +1,79 @@
 package com.yash.ngodonation.controller;
 
-import com.razorpay.*;
-import com.yash.ngodonation.domain.PaymentRequest;
-import com.yash.ngodonation.domain.PaymentResponse;
-import com.yash.ngodonation.domain.PaymentVerificationRequest;
-import com.yash.ngodonation.domain.VerificationResponse;
-import org.json.JSONObject;
+import com.yash.ngodonation.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/payment")
 public class PaymentController {
 
-    private static final Logger LOGGER = Logger.getLogger(PaymentController.class.getName());
+    @Autowired
+    private PaymentService paymentService;
 
-    @Value("${razorpay.key.id}")
-    private String keyId;
-
-    @Value("${razorpay.key.secret}")
-    private String keySecret;
+    private String razorpayKeyId = "rzp_test_BZSOgBnXQoiSLs";
 
     @GetMapping("/checkout")
     public String showCheckoutPage(Model model) {
-        model.addAttribute("razorpayKeyId", keyId);
+        model.addAttribute("razorpayKeyId", razorpayKeyId);
         return "checkout";
     }
 
-    @PostMapping("/create-order")
-    @ResponseBody
-    public ResponseEntity<?> createOrder(@RequestBody PaymentRequest paymentRequest) {
+    @GetMapping("/create-order")
+    public String createOrder(Model model, @RequestParam(defaultValue = "1000") int amount) {
+        System.out.println("inside create user!!!");
         try {
-            RazorpayClient razorpay = new RazorpayClient(keyId, keySecret);
+            String orderId = paymentService.createOrder(amount, "INR", "receipt_" + System.currentTimeMillis());
 
-            JSONObject orderRequest = new JSONObject();
-            orderRequest.put("amount", paymentRequest.getAmount() * 100); // amount in paise
-            orderRequest.put("currency", "INR");
-            orderRequest.put("receipt", "order_" + System.currentTimeMillis());
-            orderRequest.put("payment_capture", 1); // Auto capture payment
+            // Add all necessary attributes
+            model.addAttribute("orderId", orderId);
+            model.addAttribute("amount", amount);
+            model.addAttribute("razorpayKeyId", razorpayKeyId);
+            model.addAttribute("currency", "INR");
 
-            // Create order
-            Order order = razorpay.orders.create(orderRequest);
+            // Print debug information
+            System.out.println("Order created with ID: " + orderId);
+            System.out.println("Amount: " + amount);
+            System.out.println("Key ID: " + razorpayKeyId);
 
-            // Create response
-            PaymentResponse response = new PaymentResponse();
-            response.setOrderId(order.get("id"));
-            response.setAmount(order.get("amount").toString());
-            response.setCurrency(order.get("currency"));
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
-
-        } catch (RazorpayException e) {
-            LOGGER.log(Level.SEVERE, "Error creating Razorpay order", e);
-            return new ResponseEntity<>("Error creating order: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+            return "payment";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error creating order: " + e.getMessage());
+            return "error";
         }
     }
 
-    @PostMapping("/verify-payment")
-    @ResponseBody
-    public ResponseEntity<?> verifyPayment(@RequestBody PaymentVerificationRequest verificationRequest) {
-        try {
-            // Get payment and signature details
-            String orderId = verificationRequest.getOrderId();
-            String paymentId = verificationRequest.getPaymentId();
-            String signature = verificationRequest.getSignature();
+    @PostMapping("/verify")
+    public String verifyPayment(
+            @RequestParam String razorpay_order_id,
+            @RequestParam String razorpay_payment_id,
+            @RequestParam String razorpay_signature,
+            Model model) {
 
-            // Create verification data
-            JSONObject attributes = new JSONObject();
-            attributes.put("razorpay_order_id", orderId);
-            attributes.put("razorpay_payment_id", paymentId);
-            attributes.put("razorpay_signature", signature);
+        System.out.println("Verifying payment...");
+        System.out.println("Order ID: " + razorpay_order_id);
+        System.out.println("Payment ID: " + razorpay_payment_id);
 
-            // Verify signature
-            boolean isValid = Utils.verifyPaymentSignature(attributes, keySecret);
+        boolean isValid = paymentService.verifySignature(
+                razorpay_order_id,
+                razorpay_payment_id,
+                razorpay_signature
+        );
 
-            if (isValid) {
-                // Update your database here
-                return new ResponseEntity<>(new VerificationResponse(true, "Payment verified successfully"),
-                        HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(new VerificationResponse(false, "Payment verification failed"),
-                        HttpStatus.BAD_REQUEST);
-            }
-
-        } catch (RazorpayException e) {
-            LOGGER.log(Level.SEVERE, "Error verifying payment", e);
-            return new ResponseEntity<>(new VerificationResponse(false, "Error verifying payment: " + e.getMessage()),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+        if (isValid) {
+            model.addAttribute("status", "success");
+            return "success";
+        } else {
+            model.addAttribute("status", "failed");
+            return "error";
         }
-    }
-
-    // Handle payment success
-    @PostMapping("/payment-success")
-    public String paymentSuccess(@RequestParam Map<String, String> requestParams, Model model) {
-        model.addAttribute("paymentId", requestParams.get("razorpay_payment_id"));
-        model.addAttribute("orderId", requestParams.get("razorpay_order_id"));
-        return "payment-success";
-    }
-
-    // Handle payment failure
-    @PostMapping("/payment-failure")
-    public String paymentFailure(@RequestParam Map<String, String> requestParams, Model model) {
-        model.addAttribute("errorMessage", requestParams.get("error[description]"));
-        return "payment-failure";
     }
 }

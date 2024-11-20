@@ -5,6 +5,19 @@ session="true" %> <%@ page isELIgnored="false" %>
 <link rel="stylesheet" href="static/css/styles.css" />
 <link rel="stylesheet" href="static/css/auth-styles.css" />
 
+<script>
+    function pay() {
+        alert("pay called");
+        fetch('/create_payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: 'amount=1000' // Amount in INR
+                    })
+                    alert("check terminal")
+    }
+</script>
 
 <nav class="navbar">
   <div class="nav-links">
@@ -18,7 +31,9 @@ session="true" %> <%@ page isELIgnored="false" %>
           <a href="login" class="auth-nav-btn login-btn">Login</a>
           <a href="register" class="auth-nav-btn register-btn">Register</a>
         </div>
-        <a href="payment/200">pay</a>
+        <a href="create_payment">pay</a>
+        <button onclick="pay()">pay1</button>
+
       </c:if>
 
       <c:if test="${userId!=null && role == 'Donor'}">

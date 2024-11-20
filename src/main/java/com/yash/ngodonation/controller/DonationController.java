@@ -48,7 +48,6 @@ public class DonationController {
     public String donationPage(Model m, HttpSession session) {
         m.addAttribute("donationList", donationService.getAllDonations());
         List<DonationDetail> donationDetailList = donationService.getAllDonationDetails();
-        System.out.println("donationdetailList: "+ donationDetailList);
         m.addAttribute("donationDetailList", donationDetailList);
         session.setAttribute("currentPage", "Donations");
         return "donations";

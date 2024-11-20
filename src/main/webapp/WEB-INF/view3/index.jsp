@@ -24,6 +24,8 @@ isELIgnored="false" %>
         <jsp:include page="include/navbar.jsp" />
 
 
+
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
