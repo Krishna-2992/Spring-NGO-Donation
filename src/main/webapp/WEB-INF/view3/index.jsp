@@ -12,19 +12,24 @@ isELIgnored="false" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NGO Donation Website</title>
 
+    <link rel="icon" href="favicon.png" type="image/png"> <!-- For .png files -->
+
+
     <!-- CSS Imports -->
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/auth-styles.css">
+    <link rel="stylesheet" href="static/css/popup.css">
 
     <!-- JavaScript Imports -->
     <script src="static/js/auth-scripts.js" defer></script>
+    <script src="static/js/popup.js" defer></script>
+
 </head>
 <body>
     <!-- Navbar -->
         <jsp:include page="include/navbar.jsp" />
 
-
-
+    <jsp:include page="include/popup.jsp"/>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -34,6 +39,10 @@ isELIgnored="false" %>
             <a href="#campaigns" class="donate-btn">Donate Now</a>
         </div>
     </section>
+
+    <c:if test="${param.act eq 'ds'}">
+        Donation successful! Thanks for donating for a bright future
+    </c:if>
 
     <!-- Campaigns Section -->
         <section class="section" id="campaigns">

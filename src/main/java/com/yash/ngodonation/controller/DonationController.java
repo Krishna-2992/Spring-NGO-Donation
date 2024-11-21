@@ -36,12 +36,18 @@ public class DonationController {
     }
 
     @RequestMapping(value="/donate")
-    public String donate(@ModelAttribute("command") DonationCommand cmd, Model m, @RequestParam String campaignId, HttpSession session) {
+    public String donate(@ModelAttribute("command") DonationCommand cmd, Model m, HttpSession session) {
         // Implement the logic for payment gateway
         Integer userId = (Integer) session.getAttribute("userId");
         if(userId==null) return "redirect:login";
-        donationService.handleDonation(userId, Integer.parseInt(campaignId), cmd.getAmount());
-        return "redirect:index";
+        System.out.println("inside donate controller");
+        System.out.println("userId: " + userId);
+        String campaignId = (String) session.getAttribute("currentCampaignId");
+        System.out.println("current campaign id: " + campaignId);
+        int amount = (int) session.getAttribute("amount");
+        System.out.println("amount: " + amount);
+        donationService.handleDonation(userId, Integer.parseInt(campaignId), amount);
+        return "redirect:index?act=ds";
     }
 
     @RequestMapping(value="/donations")

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +27,8 @@ public class CampaignController {
     }
 
     @RequestMapping(value = "/campaign")
-    public String getCampaign(Model m) {
+    public String getCampaign(Model m, @RequestParam String id, HttpSession session) {
+        session.setAttribute("currentCampaignId", id);
         m.addAttribute("campaignList", campaignService.getAllCampaigns());
         DonationCommand cmd = new DonationCommand();
         m.addAttribute("command", cmd);

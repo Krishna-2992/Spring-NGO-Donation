@@ -9,6 +9,7 @@ isELIgnored="false" %>
 <head>
     <meta charset="UTF-8">
     <title>Donors List</title>
+    <link rel="icon" href="static/images/logo.png" type="image/png">
     <style>
         body {
             font-family: Arial, sans-serif;

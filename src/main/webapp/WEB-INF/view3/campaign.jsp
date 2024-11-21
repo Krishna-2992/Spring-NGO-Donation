@@ -10,6 +10,8 @@ isELIgnored="false" %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campaign Details</title>
+    <link rel="icon" href="static/images/logo.png" type="image/png"> <!-- For .png files -->
+
     <!-- CSS Imports -->
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/auth-styles.css">
@@ -85,7 +87,7 @@ isELIgnored="false" %>
 
                 <div class="donation-section">
                     <h2 class="donation-title">Make a Donation</h2>
-                    <f:form action="donate?campaignId=${param.id}" modelAttribute="command">
+                    <f:form action="create-order" modelAttribute="command" method="get">
 
                         <div class="donation-amounts">
                             <button type="button" class="amount-btn" onclick="selectAmount(this, 25)">₹25</button>
@@ -98,9 +100,6 @@ isELIgnored="false" %>
                         <button type="submit" class="donate-btn">Donate Now</button>
 
                     </f:form>
-
-                    <a href="payment/create-order?amount=1000" class="payment-button">Pay ₹1000</a>
-
 
                 </div>
             </div>

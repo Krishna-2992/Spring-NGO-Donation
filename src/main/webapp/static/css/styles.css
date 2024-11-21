@@ -5,6 +5,33 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* Smooth scroll behavior for the entire page */
+            html {
+                scroll-behavior: smooth;
+                scroll-padding-top: 80px; /* Adjust based on your header/navigation height */
+            }
+
+            /* Optional: Add a subtle animation to the donate button */
+            .donate-btn {
+                transition: transform 0.3s ease, background-color 0.3s ease;
+            }
+
+            .donate-btn:hover {
+                transform: scale(1.05);
+            }
+
+            /* Optional: Add a subtle reveal animation for campaigns section */
+            #campaigns {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+
+            #campaigns.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
         body {
             background-color: #f0f2f5;
         }

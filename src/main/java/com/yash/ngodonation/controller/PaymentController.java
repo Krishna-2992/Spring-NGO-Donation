@@ -1,5 +1,6 @@
 package com.yash.ngodonation.controller;
 
+import com.yash.ngodonation.command.DonationCommand;
 import com.yash.ngodonation.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping("/payment")
 public class PaymentController {
 
     @Autowired
@@ -27,9 +29,17 @@ public class PaymentController {
     }
 
     @GetMapping("/create-order")
-    public String createOrder(Model model, @RequestParam(defaultValue = "1000") int amount) {
+    public String createOrder(@ModelAttribute("command") DonationCommand cmd, Model model, HttpSession session) {
         System.out.println("inside create user!!!");
+        Integer userId = (Integer) session.getAttribute("userId");
+        if(userId == null) {
+            return "redirect:login";
+        }
+
         try {
+            int amount = cmd.getAmount();
+            System.out.println("amount:" + amount);
+            session.setAttribute("amount", amount);
             String orderId = paymentService.createOrder(amount, "INR", "receipt_" + System.currentTimeMillis());
 
             // Add all necessary attributes
@@ -70,10 +80,10 @@ public class PaymentController {
 
         if (isValid) {
             model.addAttribute("status", "success");
-            return "success";
+            return "redirect:donate";
         } else {
             model.addAttribute("status", "failed");
-            return "error";
+            return "redirect:index?act=pf";
         }
     }
 }
