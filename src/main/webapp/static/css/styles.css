@@ -623,3 +623,14 @@
             .card-link:hover {
                 text-decoration: none;
             }
+
+            .fulfilled-campaign {
+                background-color: rgba(50, 205, 50, 0.1); /* Light green background */
+                border: 2px solid rgba(0, 128, 0, 0.3); /* Slightly darker green border */
+                transition: all 0.3s ease;
+            }
+
+            .fulfilled-campaign:hover {
+                background-color: rgba(50, 205, 50, 0.2); /* Slightly more intense green on hover */
+                border-color: rgba(0, 128, 0, 0.5);
+            }

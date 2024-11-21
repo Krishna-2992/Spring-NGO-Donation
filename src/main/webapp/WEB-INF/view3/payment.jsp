@@ -1,20 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> uri="http://www.springframework.org/tags" prefix="s" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="f" %> <%@taglib
-uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ page
-isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
 <html>
   <head>
     <title>Make Payment</title>
-    <link rel="icon" href="static/images/logo.png" type="image/png">
+    <link rel="icon" href="static/images/logo.png" type="image/png" />
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link rel="stylesheet" href="static/css/payment.css" />
   </head>
   <body>
-    <h2>Processing Payment...</h2>
-    <div id="error-message" style="color: red"></div>
-    <div>orderId: ${orderId}</div>
+    <div class="container">
+      <h2>Processing Payment</h2>
+      <div class="spinner"></div>
+      <p>Please do not close or refresh this page</p>
+      <div class="order-info">
+        <span>Order ID: </span><span id="order-id">${orderId}</span>
+      </div>
+      <div id="error-message"></div>
+    </div>
 
     <script>
       function handlePayment() {
@@ -23,7 +27,7 @@ isELIgnored="false" %>
             key: "${razorpayKeyId}", // Enter the Key ID generated from the Dashboard
             amount: "${amount * 100}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             currency: "INR",
-            name: "Your Company Name",
+            name: "NGO Donation",
             description: "Test Transaction",
             image: "your_logo_url",
             order_id: "${orderId}",
@@ -71,7 +75,7 @@ isELIgnored="false" %>
               ondismiss: function () {
                 console.log("Checkout form closed");
                 window.location.href =
-                  "${pageContext.request.contextPath}/payment/checkout";
+                  "${pageContext.request.contextPath}/checkout";
               },
             },
           };

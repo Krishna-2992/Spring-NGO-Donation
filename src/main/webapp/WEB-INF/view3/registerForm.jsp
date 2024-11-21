@@ -374,6 +374,15 @@
             });
             return Object.values(validations).every(value => value === true);
         }
+
+        // Add this to the existing script section
+        document.getElementById('phone').addEventListener('input', function(e) {
+            // Remove any non-digit characters
+            this.value = this.value.replace(/\D/g, '');
+
+            // Trigger validation after cleaning
+            validateField('phone');
+        });
     </script>
 </body>
 </html>

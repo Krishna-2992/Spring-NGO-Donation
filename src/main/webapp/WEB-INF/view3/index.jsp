@@ -12,18 +12,32 @@ isELIgnored="false" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NGO Donation Website</title>
 
-    <link rel="icon" href="favicon.png" type="image/png"> <!-- For .png files -->
+    <link rel="icon" href="static/images/logo.png" type="image/png">
 
 
     <!-- CSS Imports -->
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/auth-styles.css">
     <link rel="stylesheet" href="static/css/popup.css">
+    <link rel="stylesheet" href="static/css/campaignCards.css">
 
     <!-- JavaScript Imports -->
     <script src="static/js/auth-scripts.js" defer></script>
     <script src="static/js/popup.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <style>
+        .fulfilled-campaign {
+                        background-color: rgba(50, 205, 50, 0.1); /* Light green background */
+                        border: 2px solid rgba(0, 128, 0, 0.3); /* Slightly darker green border */
+                        transition: all 0.3s ease;
+                    }
+
+                    .fulfilled-campaign:hover {
+                        background-color: rgba(50, 205, 50, 0.2); /* Slightly more intense green on hover */
+                        border-color: rgba(0, 128, 0, 0.5);
+                    }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -40,29 +54,42 @@ isELIgnored="false" %>
         </div>
     </section>
 
-    <c:if test="${param.act eq 'ds'}">
-        Donation successful! Thanks for donating for a bright future
-    </c:if>
-
-    <!-- Campaigns Section -->
-        <section class="section" id="campaigns">
+        <!-- Campaigns Section -->
             <h2 class="section-title">Our Campaigns</h2>
             <div class="cards-container">
-
                 <c:forEach var="u" items="${campaignList}">
-                    <a class="card no-link" href="campaign?id=${u.campaignId}">
+                    <a class="card no-link
+                        ${u.status eq 'Fulfilled' ? 'fulfilled-campaign' :
+                          (u.status eq 'Active' ? 'active-campaign' : 'inactive-campaign')}"
+                       href="campaign?id=${u.campaignId}">
                         <div class="card-icon">
-                            <c:if test="${u.campaignId eq 1}">🎨</c:if>
-                            <c:if test="${u.campaignId eq 2}">🌱</c:if>
-                            <c:if test="${u.campaignId eq 3}">👨🏻‍🎓</c:if>
+                            <c:if test="${u.campaignId eq 1}"><i class="fas fa-palette"></i></c:if>
+                            <c:if test="${u.campaignId eq 2}"><i class="fas fa-leaf"></i></c:if>
+                            <c:if test="${u.campaignId eq 3}"><i class="fas fa-graduation-cap"></i></c:if>
                         </div>
                         <h3>${u.title}</h3>
+                        <!-- Progress Bar -->
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: ${(u.fundRaised / u.targetAmount) * 100}%"></div>
+                            </div>
+                            <div class="progress-info">
+                                Raised: ₹${u.fundRaised} / ₹${u.targetAmount}
+                            </div>
+                        </div>
+
                         <p>${u.description}</p>
+
+                        <!-- Status Overlay -->
+                        <div class="status-overlay">
+                            <span class="status-text">
+                                ${u.status eq 'Fulfilled' ? 'Campaign Completed' :
+                                  (u.status eq 'Active' ? 'Ongoing Campaign' : 'Inactive')}
+                            </span>
+                        </div>
                     </a>
                 </c:forEach>
-
             </div>
-        </section>
 
     <!-- Impact Numbers -->
     <div class="impact-numbers">

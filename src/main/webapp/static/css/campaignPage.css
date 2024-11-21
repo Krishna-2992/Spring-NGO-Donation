@@ -1,3 +1,11 @@
+:root {
+    --bg-green: #e8f5e9;
+    --border-green: #c8e6c9;
+    --text-green: #2E7D32;
+    --primary-green: #4CAF50;
+    --hover-green: #81c784;
+}
+
 * {
             margin: 0;
             padding: 0;
@@ -260,4 +268,19 @@
                     font-size: 1rem;
                     font-weight: bold;
                     color: #776b6b;
+                }
+
+                .campaign-header .fulfilled-badge {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    background-color: var(--primary-green);
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-size: 0.9rem;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    z-index: 10;
                 }

@@ -25,7 +25,7 @@ public class PaymentController {
     @GetMapping("/checkout")
     public String showCheckoutPage(Model model) {
         model.addAttribute("razorpayKeyId", razorpayKeyId);
-        return "checkout";
+        return "redirect:index?act=pf";
     }
 
     @GetMapping("/create-order")

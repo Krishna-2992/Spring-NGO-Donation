@@ -40,12 +40,8 @@ public class DonationController {
         // Implement the logic for payment gateway
         Integer userId = (Integer) session.getAttribute("userId");
         if(userId==null) return "redirect:login";
-        System.out.println("inside donate controller");
-        System.out.println("userId: " + userId);
         String campaignId = (String) session.getAttribute("currentCampaignId");
-        System.out.println("current campaign id: " + campaignId);
         int amount = (int) session.getAttribute("amount");
-        System.out.println("amount: " + amount);
         donationService.handleDonation(userId, Integer.parseInt(campaignId), amount);
         return "redirect:index?act=ds";
     }
