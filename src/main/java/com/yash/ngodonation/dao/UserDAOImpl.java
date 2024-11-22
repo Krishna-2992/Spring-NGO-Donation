@@ -2,6 +2,7 @@ package com.yash.ngodonation.dao;
 
 import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.rm.UserRowMapper;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class UserDAOImpl extends BaseDAO implements UserDAO {
 
     @Override
-    public void save(User u) {
+    public void save(User u) throws DuplicateKeyException {
         String sql = "INSERT INTO user(name, phone, email, address, loginName, password, panNumber)"
                 + " VALUES(:name, :phone, :email, :address, :loginName, :password, :panNumber)";
 

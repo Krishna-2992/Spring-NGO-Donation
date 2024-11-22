@@ -11,6 +11,8 @@ public interface DonationDAO {
     List<Donation> getAllDonations();
     List<DonationDetail> getAllDonationDetails();
     Donation getDonationById(int donationId);
+    List<DonationDetail> getDonationDetailsByProperty(String property, String value);
+    List<DonationDetail> getDonationDetailsByProperty(String property, Object value);
     void save(int userId, int campaignId, int amount);
 
     void updateDonation(Donation donation);

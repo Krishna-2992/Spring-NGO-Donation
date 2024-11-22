@@ -2,6 +2,7 @@ package com.yash.ngodonation.service;
 
 import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.exception.UserBlockedException;
+import org.springframework.dao.DuplicateKeyException;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface UserService {
      * method handles the user registration task.
      * @param u
      */
-    public void register(User u);
+    public void register(User u) throws DuplicateKeyException;
 
     /**
      * the method handles login operation using given credentials. null when validation fails

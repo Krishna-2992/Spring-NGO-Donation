@@ -41,6 +41,12 @@ public class DonationServiceImpl implements DonationService {
         campaignDao.updateCampaignAmount(campaignId, amount);
     }
 
+    @Override
+    public List<DonationDetail> getDonationDetailsByUserId(int userId) {
+        System.out.println("donation services -> donation by userid");
+        return donationDao.getDonationDetailsByProperty("userId", userId);
+    }
+
 
     @Override
     public void updateDonation(Donation donation) {

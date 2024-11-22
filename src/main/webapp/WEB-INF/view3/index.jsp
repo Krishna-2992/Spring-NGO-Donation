@@ -50,11 +50,13 @@ isELIgnored="false" %>
         <div class="hero-content">
             <h1>Together We Can Make A Difference</h1>
             <p>Your generosity today creates a better tomorrow. Join us in bringing hope, help, and positive change to those who need it most.</p>
-            <a href="#campaigns" class="donate-btn">Donate Now</a>
+            <a href="#campaignCards" class="donate-btn">Donate Now</a>
         </div>
     </section>
 
+    <!-- Campaigns Section -->
         <!-- Campaigns Section -->
+        <section class="section" id="campaignCards">
             <h2 class="section-title">Our Campaigns</h2>
             <div class="cards-container">
                 <c:forEach var="u" items="${campaignList}">
@@ -90,6 +92,7 @@ isELIgnored="false" %>
                     </a>
                 </c:forEach>
             </div>
+        </section>
 
     <!-- Impact Numbers -->
     <div class="impact-numbers">

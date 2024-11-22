@@ -29,6 +29,7 @@ public class CampaignController {
     @RequestMapping(value = "/campaign")
     public String getCampaign(Model m, @RequestParam String id, HttpSession session) {
         session.setAttribute("currentCampaignId", id);
+        System.out.println("currentCampaignId" + session.getAttribute("currentCampaignId"));
         m.addAttribute("campaignList", campaignService.getAllCampaigns());
         DonationCommand cmd = new DonationCommand();
         m.addAttribute("command", cmd);

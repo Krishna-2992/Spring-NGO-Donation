@@ -44,15 +44,16 @@ public class UserController {
             return "redirect:login?act=reg"; //Login Page
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
-            m.addAttribute("err", "Username is already registered. Please select another username.");
-            return "index";//JSP
+            System.out.println("already registered username!!");
+            return "redirect:register?act=uu";//JSP
         }
     }
 
     @RequestMapping(value = "/login")
-    public String loginForm(Model m) {
+    public String loginForm(Model m, HttpSession session) {
         LoginCommand cmd = new LoginCommand();
         m.addAttribute("command", cmd);
+        System.out.println("inside login route");
         return "loginForm";//JSP
     }
 
@@ -61,16 +62,23 @@ public class UserController {
         System.out.println("inside login controller!!");
             User loggedInUser = userService.login(cmd.getLoginName(), cmd.getPassword());
             if(loggedInUser == null) {
-                m.addAttribute("err", "Login failed enter valid credentials");
-                return "redirect:index";
+                return "redirect:login?act=ic";
             } else {
                 //success
                 // check role and redirect to appropriate dashboard
                 if(loggedInUser.getRole().equals("Admin")) {
                     addUserInSession(loggedInUser, session);
+                    System.out.println("cci: " + session.getAttribute("currentCampaignId"));
+                    if(session.getAttribute("currentCampaignId") != null) {
+                        return "redirect:campaign?id="+session.getAttribute("currentCampaignId");
+                    }
                     return "redirect:index";
                 }else if (loggedInUser.getRole().equals("Donor")) {
                     addUserInSession(loggedInUser, session);
+                    System.out.println("cci: " + session.getAttribute("currentCampaignId"));
+                    if(session.getAttribute("currentCampaignId") != null) {
+                        return "redirect:campaign?id="+session.getAttribute("currentCampaignId");
+                    }
                     return "redirect:index";
                 } else {
                     m.addAttribute("err", "invalid user role");

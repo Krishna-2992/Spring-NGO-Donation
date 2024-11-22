@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class DonationController {
@@ -49,9 +50,22 @@ public class DonationController {
     @RequestMapping(value="/donations")
     public String donationPage(Model m, HttpSession session) {
         m.addAttribute("donationList", donationService.getAllDonations());
-        List<DonationDetail> donationDetailList = donationService.getAllDonationDetails();
-        m.addAttribute("donationDetailList", donationDetailList);
-        session.setAttribute("currentPage", "Donations");
+        System.out.println("---fetching donations list ");
+        System.out.println("role: " + session.getAttribute("role"));
+        String role = (String) session.getAttribute("role");
+        if(Objects.equals(role, "Admin")) {
+            System.out.println("----------fetching all donations");
+            List<DonationDetail> donationDetailList = donationService.getAllDonationDetails();
+            m.addAttribute("donationDetailList", donationDetailList);
+            session.setAttribute("currentPage", "Donations");
+        } else if(Objects.equals(role, "Donor")) {
+            System.out.println("----------fetching user donations");
+            Integer userId = (Integer) session.getAttribute("userId");
+            System.out.println("userId: " + userId);
+            List<DonationDetail> donationDetailList = donationService.getDonationDetailsByUserId(userId);
+            m.addAttribute("donationDetailList", donationDetailList);
+        }
+
         return "donations";
     }
 

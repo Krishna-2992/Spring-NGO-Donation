@@ -60,12 +60,20 @@
             width: 100%;
             padding-right: 35px; /* Make space for the eye icon */
         }
+        .error {
+            text-align: center;
+            color: red;
+        }
     </style>
 </head>
 <body>
     <jsp:include page="include/navbar.jsp"/>
     <div class="register-card">
         <h2>Register</h2> <br>
+        <c:if test="${param.act eq 'uu'}">
+            <p class="error">Username is already registered. Please select another username.</p>
+            <br>
+        </c:if>
         <f:form action="register_user" modelAttribute="command" id="registrationForm" onsubmit="return validateForm()">
             <div class="input-field">
                 <label for="name">Name</label>
@@ -240,8 +248,10 @@
                 validations.name = null;
                 return;
             }
-            if (name.length < 5 || name.length > 20) {
-                showError('nameError', 'Name must be between 5 and 20 characters');
+            // Regex to allow only alphabets and spaces
+            const nameRegex = /^[A-Za-z\s]+$/;
+            if (name.length < 5 || name.length > 20 || !nameRegex.test(name)) {
+                showError('nameError', 'Name must contain only alphabets, be between 5 and 20 characters');
                 validations.name = false;
             } else {
                 showSuccess('nameError');
@@ -249,6 +259,7 @@
             }
             updateSubmitButton();
         }
+
 
         function validatePhone() {
             const phone = document.getElementById('phone').value;
@@ -293,8 +304,10 @@
                 validations.username = null;
                 return;
             }
-            if (username.length < 4) {
-                showError('id_usernameError', 'Username must be at least 4 characters long');
+            // Regex to allow only alphanumeric characters, dots, and underscores
+            const usernameRegex = /^[a-zA-Z0-9._]+$/;
+            if (username.length < 4 || username.length > 20 || !usernameRegex.test(username)) {
+                showError('id_usernameError', 'Username must be 4-20 characters long, using only letters, numbers, . and _');
                 validations.username = false;
             } else {
                 showSuccess('id_usernameError');
@@ -382,6 +395,22 @@
 
             // Trigger validation after cleaning
             validateField('phone');
+        });
+
+        document.getElementById('name').addEventListener('input', function(e) {
+            // Remove any non-alphabetic characters except spaces
+            this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+
+            // Trigger validation after cleaning
+            validateField('name');
+        });
+
+        document.getElementById('id_username').addEventListener('input', function(e) {
+            // Remove any characters that are not alphanumeric, dot, or underscore
+            this.value = this.value.replace(/[^a-zA-Z0-9._]/g, '');
+
+            // Trigger validation after cleaning
+            validateField('username');
         });
     </script>
 </body>

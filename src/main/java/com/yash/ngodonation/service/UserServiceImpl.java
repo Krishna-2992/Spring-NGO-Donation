@@ -6,6 +6,7 @@ import com.yash.ngodonation.domain.User;
 import com.yash.ngodonation.exception.UserBlockedException;
 import com.yash.ngodonation.rm.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class UserServiceImpl extends BaseDAO implements UserService {
     private UserDAO userDAO;
 
     @Override
-    public void register(User u) {
+    public void register(User u) throws DuplicateKeyException {
         userDAO.save(u);
     }
 

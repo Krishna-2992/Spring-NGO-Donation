@@ -1,8 +1,10 @@
 package com.yash.ngodonation.dao;
 
+import com.yash.ngodonation.domain.Campaign;
 import com.yash.ngodonation.domain.Donation;
 import com.yash.ngodonation.domain.DonationDetail;
 import com.yash.ngodonation.domain.User;
+import com.yash.ngodonation.rm.CampaignRowMapper;
 import com.yash.ngodonation.rm.DonationDetailRowMapper;
 import com.yash.ngodonation.rm.DonationRowMapper;
 import com.yash.ngodonation.rm.UserRowMapper;
@@ -47,6 +49,35 @@ public class DonationDAOImpl extends BaseDAO implements DonationDAO{
     @Override
     public Donation getDonationById(int donationId) {
         return null;
+    }
+
+    @Override
+    public List<DonationDetail> getDonationDetailsByProperty(String property, String value) {
+        String sql = "select * from donation where :property = :value";
+        System.out.println("inside get donation by userId");
+        Map m = new HashMap();
+        m.put("property", property);
+        m.put("value", value);
+        return getNamedParameterJdbcTemplate().query(sql, m, new DonationDetailRowMapper());
+    }
+
+    @Override
+    public List<DonationDetail> getDonationDetailsByProperty(String property, Object value) {
+        System.out.println("donation dao -> donation by userid property object");
+        String sqlQuery =
+                "SELECT " +
+                        "d.donationId, " +
+                        "c.title as campaignTitle, " +
+                        "u.name as donorName, " +
+                        "u.phone as donorPhone, " +
+                        "d.amount as donationAmount, " +
+                        "d.date as donationDate " +
+                        "FROM donation d " +
+                        "INNER JOIN user u ON d.donorId = u.userId " +
+                        "INNER JOIN campaign c ON d.campaignId = c.campaignId " +
+                        "WHERE u." + property + "=? " +  // Moved WHERE clause before ORDER BY
+                        "ORDER BY d.donationId";        // ORDER BY comes last
+        return getJdbcTemplate().query(sqlQuery, new DonationDetailRowMapper(), value);
     }
 
     @Override

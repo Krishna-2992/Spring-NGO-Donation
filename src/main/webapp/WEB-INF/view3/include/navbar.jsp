@@ -11,7 +11,7 @@ session="true" %> <%@ page isELIgnored="false" %>
     <div class="nav-items">
       <c:if test="${userId==null}">
         <a href="index">Home</a>
-        <a href="index#campaigns">Our Campaigns</a>
+        <a href="index#campaignCards">Our Campaigns</a>
         <a href="index#contact">Contact</a>
         <div class="auth-nav-buttons">
           <a href="login" class="auth-nav-btn login-btn">Login</a>
