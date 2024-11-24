@@ -3,6 +3,8 @@ package com.yash.ngodonation.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -26,5 +28,12 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         vr.setPrefix("/WEB-INF/view3/");
         vr.setSuffix(".jsp");
         return vr;
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(5242880); // 5MB
+        return resolver;
     }
 }

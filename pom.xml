@@ -7,6 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>NgoDonation Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -69,38 +70,21 @@
       <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
-
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.33</version>
     </dependency>
-
     <dependency>
-      <groupId>com.razorpay</groupId>
-      <artifactId>razorpay-java</artifactId>
-      <version>1.4.3</version>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.4</version>
     </dependency>
-
-    <!-- Spring Boot Starter Web -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.8.0</version>
     </dependency>
-
-    <!-- Spring Boot Starter for JSP -->
-    <dependency>
-      <groupId>org.apache.tomcat.embed</groupId>
-      <artifactId>tomcat-embed-jasper</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- JSTL -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-    </dependency>
-
     <!-- Razorpay Java SDK -->
     <dependency>
       <groupId>com.razorpay</groupId>
@@ -108,16 +92,18 @@
       <version>1.4.3</version>
     </dependency>
 
-    <!-- JSON -->
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20220924</version>
-    </dependency>
-
-
   </dependencies>
+
+
+
+
+
+
+
+
   <build>
     <finalName>NgoDonation</finalName>
   </build>
 </project>
+
+

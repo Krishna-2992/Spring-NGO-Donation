@@ -45,6 +45,8 @@ isELIgnored="false" %>
 
     <jsp:include page="include/popup.jsp"/>
 
+
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
@@ -53,6 +55,12 @@ isELIgnored="false" %>
             <a href="#campaignCards" class="donate-btn">Donate Now</a>
         </div>
     </section>
+
+     Image upload section
+        <form action="uploadImage" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Upload Image</button>
+        </form>
 
     <!-- Campaigns Section -->
         <!-- Campaigns Section -->
