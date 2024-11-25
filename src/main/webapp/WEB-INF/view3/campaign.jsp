@@ -102,7 +102,7 @@
                                 <button type="button" class="amount-btn" onclick="selectAmount(this, 200)">₹200</button>
                             </div>
 
-                            <f:input path="amount" class="custom-amount" id="id-custom-amount" placeholder="Enter custom amount"/>
+                            <f:input path="amount" class="custom-amount" id="id-custom-amount" placeholder="Enter custom amount" value="${donationAmount}"/>
                             <button type="submit" class="donate-btn">Donate Now</button>
                         </f:form>
                     </div>

@@ -31,13 +31,14 @@ public class PaymentController {
     @GetMapping("/create-order")
     public String createOrder(@ModelAttribute("command") DonationCommand cmd, Model model, HttpSession session) {
         System.out.println("inside create user!!!");
+        int amount = cmd.getAmount();
         Integer userId = (Integer) session.getAttribute("userId");
         if(userId == null) {
+            session.setAttribute("donationAmount", amount);
             return "redirect:login";
         }
 
         try {
-            int amount = cmd.getAmount();
             System.out.println("amount:" + amount);
             session.setAttribute("amount", amount);
             String orderId = paymentService.createOrder(amount, "INR", "receipt_" + System.currentTimeMillis());

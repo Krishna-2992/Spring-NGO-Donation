@@ -25,9 +25,10 @@ public class CampaignServiceImpl implements CampaignService{
     }
 
     @Override
-    public void addCampaign(Campaign campaign) {
-
+    public void addCampaign(String title, String description, float targetAmount, String endDate) {
+        campaignDAO.addCampaign(title, description, targetAmount, endDate);
     }
+
 
     @Override
     public void updateCampaign(Campaign campaign) {

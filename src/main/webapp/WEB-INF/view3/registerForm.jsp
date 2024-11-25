@@ -64,6 +64,10 @@
             text-align: center;
             color: red;
         }
+        .loginButton {
+             text-align: center;
+             color: #ff6b6b;
+         }
     </style>
 </head>
 <body>
@@ -131,6 +135,8 @@
 
             <button type="submit" class="register-button" id="submitButton" disabled>Register</button>
         </f:form>
+        <br>
+        <a href="login" class="loginButton"><p>Already have an account? Login</p></a>
     </div>
 
     <script>

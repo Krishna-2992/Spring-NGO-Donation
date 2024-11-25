@@ -93,14 +93,6 @@
     </dependency>
 
   </dependencies>
-
-
-
-
-
-
-
-
   <build>
     <finalName>NgoDonation</finalName>
   </build>

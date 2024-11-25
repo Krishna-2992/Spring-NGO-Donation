@@ -1,11 +1,13 @@
 package com.yash.ngodonation.controller;
 
+import com.yash.ngodonation.command.CampaignCommand;
 import com.yash.ngodonation.command.DonationCommand;
 import com.yash.ngodonation.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,5 +36,30 @@ public class CampaignController {
         DonationCommand cmd = new DonationCommand();
         m.addAttribute("command", cmd);
         return "campaign";
+    }
+
+    @RequestMapping(value = "/addCampaignForm")
+    public String addCampaignForm(Model m) {
+        CampaignCommand cmd = new CampaignCommand();
+        m.addAttribute("command", cmd);
+        return "addCampaign";
+    }
+
+    @PostMapping(value = "/addCampaign")
+    public String addCampaign(@ModelAttribute("command") CampaignCommand cmd) {
+        String title = cmd.getTitle();
+        String description = cmd.getDescription();
+        float targetAmount = cmd.getTargetAmount();
+        String endDate = cmd.getEndDate();
+
+        System.out.println("title" + title);
+        System.out.println(description);
+        System.out.println(targetAmount);
+        System.out.println(endDate);
+
+        campaignService.addCampaign(title, description, targetAmount, endDate);
+
+        return "index";
+
     }
 }

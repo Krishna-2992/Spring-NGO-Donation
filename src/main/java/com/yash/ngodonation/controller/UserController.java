@@ -72,14 +72,14 @@ public class UserController {
                     if(session.getAttribute("currentCampaignId") != null) {
                         return "redirect:campaign?id="+session.getAttribute("currentCampaignId");
                     }
-                    return "redirect:index";
+                    return "redirect:index?act=al";
                 }else if (loggedInUser.getRole().equals("Donor")) {
                     addUserInSession(loggedInUser, session);
                     System.out.println("cci: " + session.getAttribute("currentCampaignId"));
                     if(session.getAttribute("currentCampaignId") != null) {
                         return "redirect:campaign?id="+session.getAttribute("currentCampaignId");
                     }
-                    return "redirect:index";
+                    return "redirect:index?act=dl";
                 } else {
                     m.addAttribute("err", "invalid user role");
                     return "redirect:index";
@@ -108,8 +108,6 @@ public class UserController {
         m.addAttribute("userList", userService.getUserList());
         return "donors"; //JSP
     }
-
-
 
     @RequestMapping(value = "/check_avail")
     @ResponseBody

@@ -56,11 +56,7 @@ isELIgnored="false" %>
         </div>
     </section>
 
-     Image upload section
-        <form action="uploadImage" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" required>
-            <button type="submit">Upload Image</button>
-        </form>
+    <a href="addCampaignForm">Add campaign</a>
 
     <!-- Campaigns Section -->
         <!-- Campaigns Section -->
@@ -73,7 +69,7 @@ isELIgnored="false" %>
                           (u.status eq 'Active' ? 'active-campaign' : 'inactive-campaign')}"
                        href="campaign?id=${u.campaignId}">
                         <div class="card-icon">
-                            <c:if test="${u.campaignId eq 1}"><i class="fas fa-palette"></i></c:if>
+                            <c:if test="${u.campaignId eq 1}"><i class="fa-solid fa-hand-holding-dollar"></i></c:if>
                             <c:if test="${u.campaignId eq 2}"><i class="fas fa-leaf"></i></c:if>
                             <c:if test="${u.campaignId eq 3}"><i class="fas fa-graduation-cap"></i></c:if>
                         </div>
@@ -123,6 +119,11 @@ isELIgnored="false" %>
             </div>
         </div>
     </div>
+
+    <form action="${pageContext.request.contextPath}/uploadImage" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload Image</button>
+    </form>
 
      <!-- About Section -->
         <section class="section" id="about">

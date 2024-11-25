@@ -8,7 +8,7 @@ public interface CampaignService
 {
     List<Campaign> getAllCampaigns();
     Campaign getCampaignById(int campaignId);
-    void addCampaign(Campaign campaign);
+    void addCampaign(String title, String description, float targetAmount, String endDate);
     void updateCampaign(Campaign campaign);
     void deleteCampaign(int campaignId);
 

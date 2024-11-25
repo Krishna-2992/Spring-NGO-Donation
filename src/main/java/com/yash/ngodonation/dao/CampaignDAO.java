@@ -8,7 +8,7 @@ public interface CampaignDAO
 {
     List<Campaign> getAllCampaigns();
     Campaign getCampaignById(int campaignId);
-    void addCampaign(Campaign campaign);
+    void addCampaign(String title, String description, float targetAmount, String endDate);
 
     void updateCampaign(Campaign campaign);
 

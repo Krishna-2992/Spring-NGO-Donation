@@ -27,6 +27,10 @@ isELIgnored="false" %>
             font-size: 16px; /* Font size */
             text-align: center; /* Center the text */
         }
+        .register {
+            text-align: center;
+            color: #ff6b6b;
+         }
     </style>
 </head>
 
@@ -56,6 +60,8 @@ isELIgnored="false" %>
                   <button type="submit" class="login-button">Login</button>
                 </div>
             </f:form>
+            <br>
+            <a href="register" class="register">Don't have an account? Register</a>
 
         </div>
     </div>

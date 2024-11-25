@@ -38,6 +38,8 @@
                 're': 'Registration successful!',
                 'up': 'Profile updated successfully!',
                 'pf': 'Payment failed. Kindly try to donate again!'
+                'al': 'Welcome, Admin'
+                'dl': 'Welcome, '
                 // Add more action types and messages as needed
             };
 

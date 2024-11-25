@@ -7,6 +7,8 @@ import com.yash.ngodonation.rm.UserRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
@@ -35,8 +37,23 @@ public class CampaignDAOImpl extends BaseDAO implements CampaignDAO{
     }
 
     @Override
-    public void addCampaign(Campaign campaign) {
+    public void addCampaign(String title, String description, float targetAmount, String endDate) {
+        System.out.println("campaign dao add campaign");
+        String sql = "Insert into campaign(title, description, fundRaised, targetAmount, startDate, endDate, status) " +
+                "values(:title, :description, :fundRaised, :targetAmount, :startDate, :endDate, :status)";
 
+        Map<String, Object> m = new HashMap<>();
+        m.put("title", title);
+        m.put("description", description);
+        m.put("fundRaised", 0);
+        m.put("targetAmount", targetAmount);
+        m.put("startDate", java.time.LocalDate.now());
+        m.put("endDate", endDate);
+        m.put("status", "Active");
+
+        KeyHolder kh = new GeneratedKeyHolder();
+        SqlParameterSource ps = new MapSqlParameterSource(m);
+        super.getNamedParameterJdbcTemplate().update(sql, ps, kh);
     }
 
     @Override
